@@ -23,7 +23,6 @@ public class MemberMenu {
 	    }
 
 	    private void processService(String input) throws Exception {
-	    	ServiceManager sm = new ServiceManager();
 	        switch (input) {
 	            case "1" : ds.join(); break;
 	            case "2" : memberNum = ds.login();
