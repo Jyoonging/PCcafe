@@ -15,8 +15,8 @@ public class TimeFeeService {
 			Connection conn = JdbcTemplate.getConnection();
 			String sql = " INSERT INTO TIME VALUES (T_NUM.NEXTVAL, ?,?)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, td.gettPrice());
-			pstmt.setInt(2, td.gettTime());
+			pstmt.setInt(1, td.getTimePrice());
+			pstmt.setInt(2, td.getTimeAddMin());
 			int result = pstmt.executeUpdate();
 			//결과에 따른 처리
 			if(result == 1) {
@@ -39,9 +39,9 @@ public class TimeFeeService {
 			Connection conn = JdbcTemplate.getConnection();
 			String sql = "UPDATE TIME SET T_TIME = ?, T_PRICE = ?  WHERE T_NUM = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, td.gettTime());
-			pstmt.setInt(2, td.gettPrice());
-			pstmt.setInt(3, td.gettNum());
+			pstmt.setInt(1, td.getTimeAddMin());
+			pstmt.setInt(2, td.getTimePrice());
+			pstmt.setInt(3, td.getFeeNum());
 			int result = pstmt.executeUpdate();
 			if(result == 1) {
 				System.out.println("변경 성공!");

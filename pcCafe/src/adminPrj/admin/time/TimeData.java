@@ -6,33 +6,36 @@ public class TimeData {
 	private int timeAddMin;
 	private int timeMin;
 	private int timePrice;
-
-	private int tNum;
-	private int tPrice;
-	private int tTime;
-	public int gettNum() {
-		return tNum;
+	public int getFeeNum() {
+		return feeNum;
 	}
-	public void settNum(int tNum) {
-		this.tNum = tNum;
+	public void setFeeNum(int feeNum) {
+		this.feeNum = feeNum;
 	}
-	public int gettPrice() {
-		return tPrice;
+	public int getTimeAddMin() {
+		return timeAddMin;
 	}
-	public void settPrice(int tPrice) {
-		this.tPrice = tPrice;
+	public void setTimeAddMin(int timeAddMin) {
+		this.timeAddMin = timeAddMin;
 	}
-	public int gettTime() {
-		return tTime;
+	public int getTimeMin() {
+		return timeMin;
 	}
-	public void settTime(int tTime) {
-		this.tTime = tTime;
+	public void setTimeMin(int timeMin) {
+		this.timeMin = timeMin;
 	}
-	public TimeData(int tNum, int tPrice, int tTime) {
+	public int getTimePrice() {
+		return timePrice;
+	}
+	public void setTimePrice(int timePrice) {
+		this.timePrice = timePrice;
+	}
+	public TimeData(int feeNum, int timeAddMin, int timeMin, int timePrice) {
 		super();
-		this.tNum = tNum;
-		this.tPrice = tPrice;
-		this.tTime = tTime;
+		this.feeNum = feeNum;
+		this.timeAddMin = timeAddMin;
+		this.timeMin = timeMin;
+		this.timePrice = timePrice;
 	}
 	public TimeData() {
 		super();
@@ -40,8 +43,9 @@ public class TimeData {
 	}
 	@Override
 	public String toString() {
-		return "TimeData [tNum=" + tNum + ", tPrice=" + tPrice + ", tTime=" + tTime + "]";
+		return "TimeData [feeNum=" + feeNum + ", timeAddMin=" + timeAddMin + ", timeMin=" + timeMin + ", timePrice="
+				+ timePrice + "]";
 	}
 
-
+	
 }

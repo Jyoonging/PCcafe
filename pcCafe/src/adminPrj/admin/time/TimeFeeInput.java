@@ -10,8 +10,8 @@ public class TimeFeeInput {
 		int price = Integer.parseInt(Main.SC.nextLine().trim());
 		System.out.print("추가 시간권 시간 : ");
 		int time = Integer.parseInt(Main.SC.nextLine().trim());
-		td.settPrice(price);
-		td.settTime(time);
+		td.setTimePrice(price);
+		td.setTimeAddMin(time);
 		return td;
 	}
 	
@@ -23,9 +23,9 @@ public class TimeFeeInput {
 		int time = Integer.parseInt(Main.SC.nextLine().trim());
 		System.out.print("가격 : ");
 		int price = Integer.parseInt(Main.SC.nextLine().trim());
-		td.settNum(num);
-		td.settPrice(price);
-		td.settTime(time);
+		td.setFeeNum(num);
+		td.setTimePrice(price);
+		td.setTimeAddMin(time);
 		return td;
 	}
 	
