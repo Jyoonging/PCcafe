@@ -2,17 +2,19 @@ package pcCafe.main;
 
 import java.util.Scanner;
 
+import pcCafe.useStatus.ServiceManager;
+
 public class MemberMenu {
 	
-		Scanner sc = new Scanner(System.in);
-	
+		public static int memberNum;
+		
 	    MemberController ds = new MemberController();
 	    public boolean startService() throws Exception{
 	        //선택지 보여주기
 	        displayMenu();
 
 	        //입력받기
-	        String input = sc.nextLine();
+	        String input = Main.SC.nextLine();
 
 	        if("9".equals(input)){
 	            return true;
@@ -24,9 +26,11 @@ public class MemberMenu {
 	    }
 
 	    private void processService(String input) throws Exception {
+	    	ServiceManager sm = new ServiceManager();
 	        switch (input) {
 	            case "1" : ds.join(); break;
-	            case "2" : ds.login();break;
+	            case "2" : memberNum = ds.login();
+	            			sm.showMenu();	break;
 	            case "3" : break;
 	            case "4" : break;
 	            default :
@@ -35,7 +39,7 @@ public class MemberMenu {
 
 	    }
 
-	    private void displayMenu(){
+	    public void displayMenu(){
 	    	System.out.println("                  __  ____  ____  ______    _   __   ____  __________  ___    _   ________ ");
 			System.out.println("                 / / / / / / /  |/  /   |  / | / /  / __ \\/ ____/ __ )/   |  / | / / ____/");
 			System.out.println("                / /_/ / / / / /|_/ / /| | /  |/ /  / /_/ / /   / __  / /| | /  |/ / / __   ");

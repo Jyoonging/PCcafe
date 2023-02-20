@@ -5,10 +5,11 @@ package pcCafe.main;
 	import java.sql.ResultSet;
 	import java.sql.SQLException;
 
+import pcCafe.useStatus.ServiceManager;
+
 	public class MemberController {
 
 	    private MemberView view = new MemberView();
-
 	    private MemberData md = new MemberData();
 
 	    public void join() {
@@ -50,7 +51,7 @@ package pcCafe.main;
 	        }
 	    }
 
-	    public void login() {
+	    public int login() {
 	        try {
 	            //사용자 입력 view에서 getinput 메소드 받아옴
 	            String id = view.getInput("아이디");
@@ -61,31 +62,30 @@ package pcCafe.main;
 
 	            //sql문 select문 실행 !
 	            Connection conn = JdbcTemplate.getConnection();
-	            PreparedStatement pstmt = conn.prepareStatement("SELECT MEM_ID,MEM_PWD,MEM_NAME FROM MEMBER WHERE MEM_ID=? AND MEM_PWD =?");
+	            PreparedStatement pstmt = conn.prepareStatement("SELECT MEM_NUM, MEM_ID,MEM_PWD,MEM_NAME FROM MEMBER WHERE MEM_ID=? AND MEM_PWD =?");
 	            pstmt.setString(1, md.getUserId());
 	            pstmt.setString(2, md.getUserPwd());
 	            ResultSet rs = pstmt.executeQuery();
-
+	            
 	            if (rs.next()) {
 	                //로그인 성공
 	                String name = rs.getString("MEM_NAME");
 	                System.out.println(name + "님 환영합니다.");
 	                Main.LoginMemberNick = name;
-
-	                //sql문 commit및 종료
-	                JdbcTemplate.commit(conn);
-	                JdbcTemplate.close(pstmt);
-	                JdbcTemplate.close(conn);
-	                view.showMessage("로그인 성공.");
-
+	                System.out.println("로그인 성공.");
+	                int memberNum = rs.getInt("MEM_NUM");
+	                return memberNum;
+	            } else {
+	            	return 0;
 	            }
 	        }catch(SQLException e){
 	            e.printStackTrace();;
 	            JdbcTemplate.rollback(JdbcTemplate.getConnection());
 	            view.showError("로그인 실패");
 	            }
+			return 0;
+	        
 	        }
-	    
 	    
 	    }
 
