@@ -1,4 +1,4 @@
-package pcCafej.admin.stock;
+package pcCafe.admin.stock;
 
 import pcCafe.admin.product.ProductData;
 import pcCafe.main.Main;
