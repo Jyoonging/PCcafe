@@ -1,16 +1,19 @@
 package pcCafe.main;
 
+import java.util.Scanner;
+
 public class MemberView {
 	
-
+	Scanner sc = new Scanner(System.in);
+	
 	    public String getInput(String prompt){
 	        System.out.print(prompt + ":");
-	        return SC.nextLine();
+	        return sc.nextLine();
 	    }
 
 	    public String showMessage(String message) {
 	        System.out.println(message);
-	        return SC.nextLine();
+	        return sc.nextLine();
 	    }
 
 	    public  void showError(String error) {

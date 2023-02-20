@@ -1,15 +1,18 @@
 package pcCafe.main;
 
+import java.util.Scanner;
+
 public class MemberMenu {
 	
-
+		Scanner sc = new Scanner(System.in);
+	
 	    MemberController ds = new MemberController();
 	    public boolean startService() throws Exception{
 	        //선택지 보여주기
 	        displayMenu();
 
 	        //입력받기
-	        String input = SC.nextLine();
+	        String input = sc.nextLine();
 
 	        if("9".equals(input)){
 	            return true;
