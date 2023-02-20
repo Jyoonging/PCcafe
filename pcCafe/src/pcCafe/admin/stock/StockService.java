@@ -58,7 +58,7 @@ public class StockService {
 			if(result == 1) {
 				StockLog.log(pd.getpQty());//로그저장
 			}else {
-				System.out.println("상품 이름, 수량을 확인하세요");
+				System.out.println("상품 이름을 확인하세요");
 			}
 			conn.close();
 		}catch(Exception e) {

@@ -17,8 +17,11 @@ public class AdminMain {
 		AdminService as = new AdminService();
 		//로그인 & 관리자 번호 가져오기
 		adminNum = as.adminLogin();
+		
 		//로그인 이후 서비스 시작
-		as.startService();
+		if(adminNum != 0) {
+			as.startService();
+		}
 		System.out.println("종료");
 	}
 	//예외 catch 출력문
