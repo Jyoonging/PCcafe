@@ -3,6 +3,8 @@ package pcCafe.main;
 import java.sql.Connection;
 import java.util.Scanner;
 
+import pcCafe.useStatus.ServiceManager;
+
 public class Main {
 
 	public static final Scanner SC = new Scanner(System.in);
@@ -19,13 +21,12 @@ public class Main {
 				isFinish = mm.startService();
 				 if(isFinish){break;}
 			} catch (Exception e) {
-				
-				e.printStackTrace();
+			System.err.println("Error: " + e.getMessage());
 			}
-           
         }
         System.out.println("===== 프로그램 종료 =====");
-		
+        
+        
 		
 	}
 
