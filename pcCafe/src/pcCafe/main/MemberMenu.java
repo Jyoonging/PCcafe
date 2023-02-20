@@ -2,8 +2,6 @@ package pcCafe.main;
 
 import java.util.Scanner;
 
-import pcCafe.useStatus.ServiceManager;
-
 public class MemberMenu {
 	
 		public static int memberNum;
@@ -21,7 +19,6 @@ public class MemberMenu {
 	        }
 	        //선택지에 따라 로직 실행
 	        processService(input);
-
 	        return false;
 	    }
 
@@ -30,7 +27,6 @@ public class MemberMenu {
 	        switch (input) {
 	            case "1" : ds.join(); break;
 	            case "2" : memberNum = ds.login();
-	            			sm.showMenu();	break;
 	            case "3" : break;
 	            case "4" : break;
 	            default :
