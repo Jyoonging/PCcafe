@@ -2,6 +2,8 @@ package pcCafe.main;
 
 import java.util.Scanner;
 
+import pcCafe.admin.AdminMain;
+
 public class MemberMenu {
 	
 		Scanner sc = new Scanner(System.in);
@@ -24,11 +26,13 @@ public class MemberMenu {
 	    }
 
 	    private void processService(String input) throws Exception {
+	    	AdminMain am = new AdminMain();
 	        switch (input) {
 	            case "1" : ds.join(); break;
 	            case "2" : ds.login();break;
 	            case "3" : break;
 	            case "4" : break;
+	            case "5" : am.adminmain(); break;
 	            default :
 	                System.out.println("잘못 입력하셨습니다");
 	        }
