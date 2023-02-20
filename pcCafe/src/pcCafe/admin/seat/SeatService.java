@@ -33,7 +33,7 @@ public class SeatService {
 				String mType = rs.getString("MONITOR_TYPE");
 				String sType = rs.getString("SEAT_TYPE");
 				String u = rs.getString("USAGE_YN");
-				System.out.print("| 좌석번호 : "+ no + " | 고장여부 : "+ broken + " | 모니터 :  "+ mType + " | 타입 : " + sType  + " | 현재상태 : " + u +"|");
+				System.out.print("| 좌석번호 : "+ no + " | 고장여부 : "+ broken + " | 모니터 :  "+ mType + " | 타입 : " + sType  + " | 이용상태 : " + u +"|");
 				System.out.println();
 			}
 			System.out.println("==================================================================");
@@ -82,11 +82,11 @@ public class SeatService {
 		SeatData data = SI.addSeat();
 		try {
 			Connection conn = JdbcTemplate.getConnection();
-			String sql = "INSERT INTO SEAT(SEAT_NUM,BROKEN_YN,MONITOR_TYPE,SEAT_TYPE) VALUES(SEAT_SEQ.NEXTVAL,?,?||'인치',?)";
+			String sql = "INSERT INTO SEAT(SEAT_NUM,MONITOR_TYPE,SEAT_TYPE) VALUES(SEAT_SEQ.NEXTVAL,?||'인치',?)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,data.getBrokenYN());
-			pstmt.setString(2, data.getMonitorType());
-			pstmt.setString(3, data.getSeatType());
+//			pstmt.setString(1,data.getBrokenYN());
+			pstmt.setString(1, data.getMonitorType());
+			pstmt.setString(2, data.getSeatType());
 			int result = pstmt.executeUpdate();
 			if(result == 1) {
 				System.out.println("==================================");

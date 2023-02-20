@@ -47,7 +47,7 @@ public class StockLog {
 			System.out.println("==================================");
 			System.out.println("=======수량 추가, 상품 추가 기록=======");
 			System.out.println("==================================");
-			System.out.println("| NO | AD | T I M E | QTY | CODE |");
+			System.out.println("| NO | AD | T I M E | QTY | NAME |");
 			System.out.println();
 			
 			while(rs.next()) {

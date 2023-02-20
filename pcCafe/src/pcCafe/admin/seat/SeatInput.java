@@ -8,9 +8,6 @@ public class SeatInput {
 		System.out.println("==================================");
 		System.out.println("||       신규 좌석을 추가합니다      ||");
 		System.out.println("==================================");
-		System.out.print("  고장여부(Y/N) : ");
-		String b = Main.SC.nextLine().trim();
-		String broken = b.toUpperCase();
 		System.out.println("==================================");
 		System.out.print("  모니터 사이즈 : ");
 		String mSize = Main.SC.nextLine().trim();
@@ -19,7 +16,6 @@ public class SeatInput {
 		String seat_Type = Main.SC.nextLine().trim();
 		System.out.println("==================================");
 		SeatData data = new SeatData();
-		data.setBrokenYN(broken);
 		data.setMonitorType(mSize);
 		data.setSeatType(seat_Type);
 		return data;
