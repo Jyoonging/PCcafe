@@ -1,4 +1,4 @@
-package pcCafej.admin.stock;
+package pcCafe.admin.stock;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

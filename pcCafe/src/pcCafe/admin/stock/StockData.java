@@ -1,4 +1,4 @@
-package pcCafej.admin.stock;
+package pcCafe.admin.stock;
 
 public class StockData {	
 	private int adminNum;
