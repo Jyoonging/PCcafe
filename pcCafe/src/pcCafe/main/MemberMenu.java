@@ -9,7 +9,7 @@ public class MemberMenu {
 	        displayMenu();
 
 	        //입력받기
-	        String input = ScannerUtil.SC.nextLine();
+	        String input = SC.nextLine();
 
 	        if("9".equals(input)){
 	            return true;
@@ -37,7 +37,7 @@ public class MemberMenu {
 			System.out.println("                 / / / / / / /  |/  /   |  / | / /  / __ \\/ ____/ __ )/   |  / | / / ____/");
 			System.out.println("                / /_/ / / / / /|_/ / /| | /  |/ /  / /_/ / /   / __  / /| | /  |/ / / __   ");
 			System.out.println("               / __  / /_/ / /  / / ___ |/ /|  /  / ____/ /___/ /_/ / ___ |/ /|  / /_/ /   ");
-			System.out.println("              /_/ /_/\\____/_/  /_/_/  |_/_/ |_/  /_/    \\____/_____/_/  |_/_/ |_/\\____/ ");
+			System.out.println("              /_/ /_/\\____/_/  /_/_/  |_/_/ |_/ /_/    \\____/_____/_/  |_/_/ |_/\\____/ ");
 			System.out.println("                                                                                           ");
 			System.out.println("=====================================================================================================");
 			System.out.println("                                휴먼피시방에 오신 것을 환영합니다.                                   ");

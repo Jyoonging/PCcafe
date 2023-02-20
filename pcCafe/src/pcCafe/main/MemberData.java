@@ -1,5 +1,8 @@
 package pcCafe.main;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class MemberData {
 	
 	    public static MemberData createMember(ResultSet rs) throws SQLException {
