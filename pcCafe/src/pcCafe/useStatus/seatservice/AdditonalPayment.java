@@ -13,9 +13,12 @@ import pcCafe.main.JdbcTemplate;
 import pcCafe.main.Main;
 import pcCafe.main.MemberMenu;
 import pcCafe.useStatus.SeatServiceManager;
+import pcCafe.useStatus.ServiceManager;
 
 
 public class AdditonalPayment {
+	
+	ServiceManager sm = new ServiceManager();
 	
 	// 추가결제
 		// 현재 시간-시작시간 = 현재까지 이용한 시간
@@ -33,7 +36,7 @@ public class AdditonalPayment {
 				while(rs.next()) {
 					System.out.println(rs.getString("T_NUM")+".가격:"+rs.getString("T_PRICE")+"원,시간:"+rs.getString("T_TIME")+"분");
 				}
-				System.out.println("9.이전화면으로 돌아가기");
+				System.out.println("0.이전화면으로 돌아가기");
 				
 				//클로즈
 				conn.close();
@@ -59,6 +62,9 @@ public class AdditonalPayment {
 				TimeData data = new TimeData();
 				System.out.print("요금제를 선택하세요.:");
 				String inputNum = Main.SC.nextLine().trim();
+				if(inputNum.equals("0")) {
+					sm.showMenu();
+				}
 				int feeInput = Integer.parseInt(inputNum);
 				data.setFeeNum(feeInput);
 					
