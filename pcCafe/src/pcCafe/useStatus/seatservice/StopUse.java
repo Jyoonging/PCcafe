@@ -62,6 +62,7 @@ public class StopUse {
 				System.out.println("DB오류입니다.");
 			}
 			
+			
 			//시작시간, 종료시간 조회
 			String sql1 ="SELECT TO_CHAR(PC_STARTTIME,'DD HH24:MI:SS') AS S_TIME, TO_CHAR(PC_ENDTIME,'DD HH24:MI:SS')AS E_TIME FROM PC_USE WHERE USE_NUM = ?";
 			//회원번호에 맞는 회원의 적립시간 조회

@@ -77,6 +77,8 @@ public class ServiceManager {
 		}
 		
 		
+		
+		
 		//좌석 선택
 		public void chooseSeat() {
 		    // 적립 시간 조회

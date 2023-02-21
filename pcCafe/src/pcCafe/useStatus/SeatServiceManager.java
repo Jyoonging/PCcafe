@@ -32,6 +32,7 @@ public class SeatServiceManager {
 		System.out.println("=====================================================================================================");
 		System.out.print("번호를 선택하세요. >>>>>>>> ");
 		
+		
 		String inputStr = Main.SC.nextLine().trim();
 		int input = Integer.parseInt(inputStr);
 		switch(input){
