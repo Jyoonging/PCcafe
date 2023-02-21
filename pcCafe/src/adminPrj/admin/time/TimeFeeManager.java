@@ -36,15 +36,13 @@ public class TimeFeeManager {
 				}
 				System.out.println("================================");
 				System.out.println("===============시간권=============");
-				System.out.println("1. 수정 , 2. 추가 , 3. 삭제 , 9. 종료");
+				System.out.println("1. 수정 , 2. 추가         , 9. 종료");
 				System.out.print(":  "   );
 				String select = Main.SC.nextLine().trim();
 				if(select.equals("1")) {
 					tfs.edit();
 				}else if(select.equals("2")) {
 					tfs.add();			
-				}else if(select.equals("3")) {
-					tfs.delete();
 				}else if(select.equals("9")) {
 					run = false;
 				}

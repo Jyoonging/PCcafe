@@ -62,8 +62,9 @@ public class AdditonalPayment {
 				System.out.print("요금제를 선택하세요.:");
 				String inputNum = Main.SC.nextLine().trim();
 				if(inputNum.equals("0")) {
-					sm.showMenu();
+					return;
 				}
+				
 				int feeInput = Integer.parseInt(inputNum);
 				data.setFeeNum(feeInput);
 					
@@ -101,7 +102,6 @@ public class AdditonalPayment {
 				System.out.println("상세오류를 확인합니다. 관리자에게 보여주세요.");
 				System.out.println(se.toString());
 				System.out.println("이전 단계로 돌아갑니다.");
-				showTimeTable();
 				
 			}catch(Exception e) {
 				System.out.println("알수없는 오류. 관리자를 호출하세요.");
@@ -109,7 +109,6 @@ public class AdditonalPayment {
 				System.out.println(e.toString());
 				System.out.println("이전단계로 돌아갑니다.");
 				//이전단계
-				showTimeTable();
 			}
 			
 			//timeAddMin과timeMin과feeNum을 한꺼번에 데이터로 관리하기
@@ -123,11 +122,9 @@ public class AdditonalPayment {
 				addPayList(data);
 			}else if(input.equalsIgnoreCase("n")) {
 				System.out.println("결제가 취소되었습니다. 이전 화면으로 돌아갑니다.");
-				showTimeTable();
 				//뒤로가기하면 시간권선택화면으로 돌아가기 
 			}else {
 				System.out.println("잘못입력하셨습니다. 이전 화면으로 돌아갑니다.");
-				showTimeTable();
 			}
 		}
 		
@@ -151,7 +148,6 @@ public class AdditonalPayment {
 				updateTimeDate(data);
 			}else {
 				System.out.println("결제 실패. 전단계로 돌아갑니다.");
-				showTimeTable();
 				//돌아가는 코드 작성해야함.
 			}
 			
@@ -224,16 +220,13 @@ public class AdditonalPayment {
 					if(result == 1) {
 						System.out.println(data.getTimeAddMin() +"분이 추가되었습니다.");
 						System.out.println("남은 시간 : " + totalT + "분");
-						ssm.afterChooseSeat();
 					}else {
 						System.out.println("오류발생. 전단계로 돌아갑니다.");
-						showTimeTable();
 					}
 				conn.close();
 				}catch(Exception e) {
 					System.out.println("커넥션오류발생. 전단계로 돌아갑니다.");
 					System.out.println(e.toString());
-					showTimeTable();
 				}
 		}
 	

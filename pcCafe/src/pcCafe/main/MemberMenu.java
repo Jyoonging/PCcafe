@@ -17,27 +17,31 @@ public class MemberMenu {
 
 	        if("9".equals(input)){
 	            return true;
+	        }else {
+	        	processService(input);
+	        	
+	        	return false;
 	        }
 	        //선택지에 따라 로직 실행
-	        processService(input);
-	        return false;
 	    }
 
 	    private void processService(String input) throws Exception {
 	    	ServiceManager sm = new ServiceManager();
 	    	AdminMain am = new AdminMain();
-	        switch (input) {
-	            case "1" : ds.join(); break;
-	            case "2" : memberNum = ds.login();
-	            			if(memberNum != 0) {
-	            				sm.showMenu(); break;
-	            			}else {
-	            				AdminMain.Exception();
-	            			}
-	            case "3" : break;
-	            case "5" : am.adminmain(); break;
-	            default :
-	                System.out.println("잘못 입력하셨습니다");
+	    	if("1".equals(input)) {
+	    		ds.join();
+	    	}else if("2".equals(input)) {
+	    		memberNum = ds.login();
+	    		
+    			if(memberNum != 0) {
+    				sm.showMenu(); 
+    			}else {
+    				AdminMain.Exception();
+    			}
+	    	}else if ("3".equals(input)) {
+	    		am.adminmain();
+	        }else {
+	        	System.out.println("잘못 입력하셨습니다");
 	        }
 
 	    }
@@ -53,9 +57,7 @@ public class MemberMenu {
 			System.out.println("                                휴먼피시방에 오신 것을 환영합니다.                                   ");
 	        System.out.println("1. 회원가입");
 	        System.out.println("2. 로그인");
-	        System.out.println("3. 개인정보 수정");
-	        System.out.println("4. 사람 찾기");
-	        System.out.println("5. 관리자 모드");
+	        System.out.println("3. 관리자 모드");
 	        System.out.println("9. 종료");
 	    }
 
