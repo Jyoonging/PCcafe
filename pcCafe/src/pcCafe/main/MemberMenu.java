@@ -1,6 +1,11 @@
 package pcCafe.main;
 
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import pcCafe.admin.AdminMain;
 import pcCafe.useStatus.ServiceManager;
 
@@ -38,7 +43,9 @@ public class MemberMenu {
     			}else {
     				AdminMain.Exception();
     			}
-	    	}else if ("3".equals(input)) {
+	    	}else if("3".equals(input)) {
+	    		findMemberId();
+	    	}else if ("4".equals(input)) {
 	    		am.adminmain();
 	        }else {
 	        	System.out.println("잘못 입력하셨습니다");
@@ -57,10 +64,36 @@ public class MemberMenu {
 			System.out.println("                                휴먼피시방에 오신 것을 환영합니다.                                   ");
 	        System.out.println("1. 회원가입");
 	        System.out.println("2. 로그인");
-	        System.out.println("3. 관리자 모드");
+	        System.out.println("3. 아이디찾기");
+	        System.out.println("4. 관리자 모드");
 	        System.out.println("9. 종료");
 	    }
+	    
+	    //멤버아이디 찾기 메소드
+	    public void findMemberId(){
+	    	try{
+	    		//생년월일, 이름 받기
+	    		System.out.print("이름 : ");
+	    		String inputName =  Main.SC.nextLine().trim();
+	    		System.out.print("생년월일 : ");
+	    		String inputBirth = Main.SC.nextLine().trim();
+	    		
+	    		Connection conn = JdbcTemplate.getConnection();
+	    		String sql = "SELECT MEM_ID FROM MEMBER WHERE MEM_NAME =? AND MEM_BIRTH = ?";
+	    		PreparedStatement pstmt = conn.prepareStatement(sql);
+	    		pstmt.setString(1, inputName);
+	    		pstmt.setString(2, inputBirth);
+	    		ResultSet rs = pstmt.executeQuery();
+	    		rs.next();
+	    		String memberId = rs.getString("MEM_ID");
+	    		System.out.println(inputName +"님의 아이디는 "+memberId +" 입니다.");
+	    		
+	    	}catch(Exception e) {
+	    		System.out.println("일치하는 정보의 회원이 없습니다.");
+	    	}
+	    	
 
+	    }
 
 	}
 
