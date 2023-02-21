@@ -17,7 +17,7 @@ import pcCafe.useStatus.SeatServiceManager;
 
 public class AdditonalPayment {
 	
-	Scanner sc2 = new Scanner(System.in);
+	public static int useNum;
 	
 	// 추가결제
 		// 현재 시간-시작시간 = 현재까지 이용한 시간
@@ -113,7 +113,7 @@ public class AdditonalPayment {
 		
 		public void getInfo(TimeData data) {
 			System.out.print(data.getTimeAddMin()+"분, "+data.getTimePrice()+"원 결제 하시겠습니까? (y/n)");
-			String input = sc2.nextLine().trim();
+			String input = Main.SC.nextLine().trim();
 			if(input.equalsIgnoreCase("y")) {
 				System.out.println("결제가 완료되었습니다.");
 				addPayList(data);
@@ -176,7 +176,7 @@ public class AdditonalPayment {
 				ResultSet rs3 = pstmt3.executeQuery();
 				rs3.next();
 				//가장 최신의 use_num을 가져와서 저장
-				StopUse.useNum = rs3.getInt("USE_NUM");
+				useNum = rs3.getInt("USE_NUM");
 				
 				//SQL문 작성(update) : 적립시간에 결제시간 더한 값 회원정보에 업데이트하기 
 				//(시간권 결제한 시간 + (적립시간-(현재시간-사용시작시간 = 현재까지 이용한 시간)))
@@ -186,7 +186,7 @@ public class AdditonalPayment {
 				PreparedStatement pstmt1 = conn.prepareStatement(sql1); 
 				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 				PreparedStatement pstmt4 = conn.prepareStatement(sql4);
-				pstmt1.setInt(1, StopUse.useNum);
+				pstmt1.setInt(1, useNum);
 				ResultSet rs1 = pstmt1.executeQuery();
 				rs1.next();
 					String startTime=rs1.getString("S_TIME");
