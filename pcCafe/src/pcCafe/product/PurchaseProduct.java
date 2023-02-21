@@ -45,7 +45,7 @@ public class PurchaseProduct {
 		String sql1 = "INSERT INTO PRODUCT_PAYMENT(PP_NUM, USE_NUM) VALUES(PP_NUM_SEQ.NEXTVAL,?)";
 		
 		PreparedStatement pstmt1 = conn.prepareStatement(sql1);
-		pstmt1.setInt(1, AdditonalPayment.useNum); //!!!!!!!!!!깡분님 이용번호 받아서 수정!!!!!!!!!!
+		pstmt1.setInt(1, 8); //!!!!!!!!!!깡분님 이용번호 받아서 수정!!!!!!!!!!
 		int result1 = pstmt1.executeUpdate();
 		conn.commit();
 
@@ -118,6 +118,7 @@ public class PurchaseProduct {
 		pstmt3.setInt(2, ppNum);
 		pstmt3.setInt(3, selectPqty);
 		int result2 = pstmt3.executeUpdate();
+		conn.commit();
 	
 		
 		System.out.println("\n=====장바구니=====");
@@ -154,6 +155,7 @@ public class PurchaseProduct {
 		pstmt7.setInt(1, pQty-selectPqty); //재고 - 입력한 수량
 		pstmt7.setInt(2, selectPnum); //선택한 상품번호
 		int result3 = pstmt7.executeUpdate();
+		conn.commit();
 	}
 	
 	
@@ -208,11 +210,13 @@ public class PurchaseProduct {
 		PreparedStatement pstmt8 = conn.prepareStatement(sql8);
 		pstmt8.setInt(1, showTotal());
 		int result4 = pstmt8.executeUpdate();
+		conn.commit();
 		
 		//결제시간 업데이트
 		String sql9 = "UPDATE PRODUCT_PAYMENT SET P_PAY_DATE = SYSDATE WHERE P_PAY_DATE IS NULL";
 		PreparedStatement pstmt9 = conn.prepareStatement(sql9);
 		int result5 = pstmt9.executeUpdate();
+		conn.commit();
 	}
 
 	
