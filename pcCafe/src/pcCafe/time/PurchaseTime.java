@@ -40,11 +40,8 @@ public final class PurchaseTime {
 				 return true;
 			 }
 			 
-		}catch(SQLException se) {
-			System.out.println("DB에러 발생. DB관리자에 문의하세요.");
-			return true;
 		}catch(Exception e) {
-			System.out.println("커넥션 오류 발생.");
+			System.out.println("정확한 숫자를 입력해주세요.");
 			return true;
 		}
 }
@@ -100,18 +97,8 @@ public final class PurchaseTime {
 				getInfo(data);
 				return 0;
 			}
-		}catch(SQLException se) {
-			System.out.println("값이 잘못 입력되었는지 확인해주세요.");
-			System.out.println("상세오류를 확인합니다. 관리자에게 보여주세요.");
-			System.out.println(se.toString());
-			System.out.println("이전 단계로 돌아갑니다.");
-			return 1;
-			
 		}catch(Exception e) {
-			System.out.println("알수없는 오류. 관리자를 호출하세요.");
-			System.out.println("상세오류를 확인합니다. 관리자에게 보여주세요.");
-			System.out.println(e.toString());
-			System.out.println("이전단계로 돌아갑니다.");
+			System.out.println("정확한 숫자를 입력해주세요.");
 			return 1;
 			//이전단계
 		}
@@ -151,10 +138,8 @@ public final class PurchaseTime {
 				
 			}else {
 				System.out.println("잘못된 입력입니다. 전 단계로 돌아갑니다.");
-				
 			}
 				
-			
 		}else if(input.equalsIgnoreCase("n")) {
 			System.out.println("결제가 취소되었습니다. 이전 화면으로 돌아갑니다.");
 			//뒤로가기하면 시간권선택화면으로 돌아가기 
@@ -209,10 +194,9 @@ public final class PurchaseTime {
 		
 		//커넥션 종료
 		conn.close(); //SQLException e
-		}catch(SQLException se) {
-			System.out.println("DB문제입니다. 이전 단계로 돌아갑니다.");
 		}catch(Exception e) {
-			System.out.println("커넥션오류입니다.");}
+			System.out.println("정확한 숫자를 입력해주세요.");
+		}
 		
 	}
 
@@ -239,10 +223,8 @@ public final class PurchaseTime {
 			}
 			conn.close();
 		
-		}catch(SQLException se) {
-			System.out.println("DB오류 발생. 전단계로 돌아갑니다.");
 		}catch(Exception e) {
-			System.out.println("커넥션오류발생. 전단계로 돌아갑니다.");
+			System.out.println("정확한 숫자를 입력해주세요.");
 		}
 	}
 	

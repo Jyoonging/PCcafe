@@ -59,13 +59,15 @@ public class ServiceManager {
 				System.out.println("=====================================================================================================");
 				System.out.print("메뉴를 선택하세요. > ");
 				PurchaseTime pt = new PurchaseTime();
-				String inputStr = Main.SC.nextLine().trim();
-				int input = Integer.parseInt(inputStr);
-				if(input == 1) {
-					run = pt.showTimeTable();
-					}
-					else if(input == 2) { 
-						chooseSeat();  int go = usage_YN();
+				
+				try {
+					String inputStr = Main.SC.nextLine().trim();
+					int input = Integer.parseInt(inputStr);
+					if(input == 1) {
+						run = pt.showTimeTable();
+					}else if(input == 2) { 
+						chooseSeat();
+						int go = usage_YN();
 						if( go == 1) {
 							ssm.afterChooseSeat();
 						}
@@ -73,6 +75,9 @@ public class ServiceManager {
 						run = false; 
 					} else {
 						System.out.println("다시 선택하세요");
+					}
+				}catch (Exception e) {
+					System.out.println("잘못된 입력입니다.");
 				}
 			}
 		}
