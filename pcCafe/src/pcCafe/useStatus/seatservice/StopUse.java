@@ -15,7 +15,7 @@ import pcCafe.useStatus.ServiceManager;
 
 public class StopUse {
 	
-	public static int useNum;
+
 	
 	//이용 종료
 	public void stopUse() {
@@ -47,14 +47,13 @@ public class StopUse {
 			ResultSet rs4 = pstmt4.executeQuery();
 			rs4.next();
 			//가장 최신의 use_num을 가져와서 저장
-			useNum = rs4.getInt("USE_NUM");
+			AdditonalPayment.useNum = rs4.getInt("USE_NUM");
 			
-			System.out.println(useNum);
 			
 			//useNum에 해당하는 줄의 종료시간을 업데이트
 			String sql5 = "UPDATE PC_USE SET PC_ENDTIME = SYSDATE WHERE USE_NUM = ?";
 			PreparedStatement pstmt5 = conn.prepareStatement(sql5);
-			pstmt5.setInt(1, useNum);
+			pstmt5.setInt(1, AdditonalPayment.useNum);
 			int result5 = pstmt5.executeUpdate();
 			if(result5==1) {
 				System.out.println("종료되었습니다.");
@@ -71,7 +70,7 @@ public class StopUse {
 			
 			//SQL1
 			PreparedStatement pstmt1 = conn.prepareStatement(sql1);
-			pstmt1.setInt(1,useNum);
+			pstmt1.setInt(1,AdditonalPayment.useNum);
 			ResultSet rs1 = pstmt1.executeQuery();
 			rs1.next();
 			String startTime=rs1.getString("S_TIME");

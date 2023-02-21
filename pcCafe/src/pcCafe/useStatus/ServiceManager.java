@@ -120,11 +120,11 @@ public class ServiceManager {
 
 		        // 결과집합에서 데이터 꺼내기
 		        while (rs.next()) {
-		            seatNum = rs.getInt("SEAT_NUM");
+		            int seatNumber = rs.getInt("SEAT_NUM");
 		            String SEAT_TYPE = rs.getString("SEAT_TYPE");
 		            String USAGE_YN = rs.getString("USAGE_YN");
 
-		            System.out.print(seatNum + "번" + " ◻︎ ");
+		            System.out.print(seatNumber + "번" + " ◻︎ ");
 		            System.out.print(" || ");
 
 		            if (SEAT_TYPE.equals("금연")) {
@@ -154,8 +154,9 @@ public class ServiceManager {
 
 		//좌석 사용여부
 		public void usage_YN() {
-		    int input = Main.SC.nextInt();
-		    // 저장된 좌석 번호로 사용 여부 조회
+			String inputNum = Main.SC.nextLine().trim();
+			int input = Integer.parseInt(inputNum);
+			// 저장된 좌석 번호로 사용 여부 조회
 		    String sql1 = "SELECT SEAT_NUM, USAGE_YN FROM SEAT WHERE SEAT_NUM = ?";
 		    // 좌석 선택과 동시에 이용내역 INSERT
 		    String sql2 = "INSERT INTO PC_USE(USE_NUM,SEAT_NUM,MEM_NUM, PC_STARTTIME) VALUES(PC_USE_SEQ.NEXTVAL,?,?,SYSDATE)";
@@ -169,7 +170,7 @@ public class ServiceManager {
 		        ResultSet rs = pstmt1.executeQuery();
 		        
 		        // 결과 꺼내서 사용 여부 알려주기
-		        rs.next(); 
+		        rs.next();
 		            String USAGE_YN = rs.getString("USAGE_YN");
 		            seatNum = rs.getInt("SEAT_NUM");
 		            if (USAGE_YN.equals("Y")) {
@@ -180,7 +181,7 @@ public class ServiceManager {
 		        PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 		        pstmt2.setInt(1,seatNum);
 		        pstmt2.setInt(2,MemberMenu.memberNum);
-		        int result1 = pstmt2.executeUpdate();
+		        pstmt2.executeUpdate();
 		        //좌선 선택함과 동시에 좌석테이블 사용 여부 업데이트
 		        PreparedStatement pstmt3 = conn.prepareStatement(sql3);
 		        pstmt3.setInt(1,seatNum);
