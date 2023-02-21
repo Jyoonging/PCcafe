@@ -14,7 +14,7 @@ public final class PurchaseTime {
 
 	
 	
-	public void showTimeTable(){
+	public boolean showTimeTable(){
 		try {
 			Connection conn = JdbcTemplate.getConnection();
 			System.out.println("=========피시방 요금===========");
@@ -33,13 +33,19 @@ public final class PurchaseTime {
 			//클로즈
 			conn.close();
 			
-			inputFee();
+			 int run = inputFee();
+			 if(run == 1) {
+				 return false;
+			 }else {
+				 return true;
+			 }
+			 
 		}catch(SQLException se) {
 			System.out.println("DB에러 발생. DB관리자에 문의하세요.");
-			System.out.println("오류상세 정보"+se.toString());
+			return true;
 		}catch(Exception e) {
 			System.out.println("커넥션 오류 발생.");
-			System.out.println(e.toString());
+			return true;
 		}
 }
 	
@@ -49,15 +55,14 @@ public final class PurchaseTime {
 	//timeAddMin: 요금제 번호에 맞는 요금제 시간, 추가시간같은 개념
 	//timePrice: 요금제 번호에 맞는 요금제 가격
 	//timeMin: 	회원테이블에서 받아온 적립시간
-	public void inputFee() {
-		ServiceManager sm = new ServiceManager();
+	public int inputFee() {
 		try {
 			TimeData data = new TimeData();
 			System.out.print("요금제를 선택하세요.:");
 			String feeInput = Main.SC.nextLine().trim();
 			if(feeInput.equals("0")) {
 				System.out.println("로그인 후 선택화면으로 돌아가기");
-				sm.showMenu();
+				return 1;
 			}else {
 			
 				int inputNum = Integer.parseInt(feeInput);
@@ -93,22 +98,22 @@ public final class PurchaseTime {
 				conn.close(); //se
 				//다음단계로 넘어가기
 				getInfo(data);
+				return 0;
 			}
 		}catch(SQLException se) {
 			System.out.println("값이 잘못 입력되었는지 확인해주세요.");
 			System.out.println("상세오류를 확인합니다. 관리자에게 보여주세요.");
 			System.out.println(se.toString());
 			System.out.println("이전 단계로 돌아갑니다.");
-			showTimeTable();
-			
+			return 1;
 			
 		}catch(Exception e) {
 			System.out.println("알수없는 오류. 관리자를 호출하세요.");
 			System.out.println("상세오류를 확인합니다. 관리자에게 보여주세요.");
 			System.out.println(e.toString());
 			System.out.println("이전단계로 돌아갑니다.");
+			return 1;
 			//이전단계
-			showTimeTable();
 		}
 		
 		
@@ -134,30 +139,27 @@ public final class PurchaseTime {
 			String input2 = Main.SC.nextLine().trim();
 			
 			//switch문으로 선택하기
-			switch(input2) {
-			case "1" : payCard(data); break;
-			case "2" : 
+			if("1".equals(input2)) {
+				payCard(data);
+			}else if("2".equals(input2)) {
 				change = payCash(data); 
 				if(change<0) {
 					System.out.println("결제 실패입니다. 전단계로 돌아갑니다.");
-					showTimeTable();
 				}
 				System.out.println("거스름돈 : "+change +"원");
 				addPayList(data);
-				break;
-			default : 
+				
+			}else {
 				System.out.println("잘못된 입력입니다. 전 단계로 돌아갑니다.");
-				showTimeTable();
 				
 			}
+				
 			
 		}else if(input.equalsIgnoreCase("n")) {
 			System.out.println("결제가 취소되었습니다. 이전 화면으로 돌아갑니다.");
-			showTimeTable();
 			//뒤로가기하면 시간권선택화면으로 돌아가기 
 		}else {
 			System.out.println("잘못입력하셨습니다. 이전 화면으로 돌아갑니다.");
-			showTimeTable();
 		}
 		
 	}
@@ -202,7 +204,6 @@ public final class PurchaseTime {
 			updateTimeDate(data);
 		}else {
 			System.out.println("결제 실패. 전단계로 돌아갑니다.");
-			showTimeTable();
 			//돌아가는 코드 작성해야함.
 		}
 		
@@ -210,13 +211,8 @@ public final class PurchaseTime {
 		conn.close(); //SQLException e
 		}catch(SQLException se) {
 			System.out.println("DB문제입니다. 이전 단계로 돌아갑니다.");
-			showTimeTable();
 		}catch(Exception e) {
-			System.out.println("커넥션오류입니다.");
-			showTimeTable();
-		}finally { //오류와 상관없이 무조건 실행되는 구
-			
-		}
+			System.out.println("커넥션오류입니다.");}
 		
 	}
 
@@ -237,24 +233,16 @@ public final class PurchaseTime {
 			if(result == 1) {
 				System.out.println(data.getTimeAddMin()+"분이 추가되었습니다.");
 				conn.commit();
-				sm.showMenu();
 				//강분님께 화면 받아서 그 화면으로 돌아가기 
 			}else {
 				System.out.println("오류발생. 전단계로 돌아갑니다.");
-				showTimeTable();
 			}
 			conn.close();
 		
 		}catch(SQLException se) {
 			System.out.println("DB오류 발생. 전단계로 돌아갑니다.");
-			System.out.println(se.toString());
-			showTimeTable();
 		}catch(Exception e) {
 			System.out.println("커넥션오류발생. 전단계로 돌아갑니다.");
-			System.out.println(e.toString());
-			showTimeTable();
-		}finally {
-			
 		}
 	}
 	

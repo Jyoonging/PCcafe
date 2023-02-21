@@ -64,7 +64,6 @@ public class CheckRemainTime {
 					int rtime = memTime - diffMin2;
 					
 					System.out.println(memName + "님의 남은 시간은 " + rtime + "분 입니다.");
-					ssm.afterChooseSeat();
 				
 				// conn 정리
 		        conn.close();

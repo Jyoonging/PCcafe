@@ -47,26 +47,32 @@ public class ServiceManager {
   		}
     
 		public void showMenu() {
-			System.out.println("====================================  회원메뉴 >   ====================================================");
-			System.out.println("                                                                                       "); 
-			System.out.println("    ┌───────────┐  ┌───────────┐  ┌─────────┐  ");
-			System.out.println("    │1. 요금 선택 │  │2. 좌석 선택 │  │ 3. 종료  │  ");
-			System.out.println("    └───────────┘  └───────────┘  └─────────┘   ");
-			System.out.println("=====================================================================================================");
-			System.out.print("메뉴를 선택하세요. > ");
-			
-			PurchaseTime pt = new PurchaseTime();
-			while(true) {
+			SeatServiceManager ssm = new SeatServiceManager();
+				
+			boolean run  = true;
+			while(run) {
+				System.out.println("====================================  회원메뉴 >   ====================================================");
+				System.out.println("                                                                                       "); 
+				System.out.println("    ┌───────────┐  ┌───────────┐  ┌─────────┐  ");
+				System.out.println("    │1. 요금 선택 │  │2. 좌석 선택 │  │ 3. 종료  │  ");
+				System.out.println("    └───────────┘  └───────────┘  └─────────┘   ");
+				System.out.println("=====================================================================================================");
+				System.out.print("메뉴를 선택하세요. > ");
+				PurchaseTime pt = new PurchaseTime();
 				String inputStr = Main.SC.nextLine().trim();
 				int input = Integer.parseInt(inputStr);
 				if(input == 1) {
-					pt.showTimeTable();
+					run = pt.showTimeTable();
 					}
 					else if(input == 2) { 
-					chooseSeat();
+						chooseSeat();  int go = usage_YN();
+						if( go == 1) {
+							ssm.afterChooseSeat();
+						}
 					}else if(input == 3) { 
-				return;} else {
-				System.out.println("다시 선택하세요");
+						run = false; 
+					} else {
+						System.out.println("다시 선택하세요");
 				}
 			}
 		}
@@ -90,7 +96,6 @@ public class ServiceManager {
 				        if (memTime == 0) {
 				        	System.out.println("남은 시간이 없습니다.");
 				        	System.out.println("결제를 먼저 해주세요");
-				        	showMenu();
 				        } else if(memTime != 0) {
 				        	showSeat();
 				        }
@@ -138,7 +143,7 @@ public class ServiceManager {
 		        System.out.println();
 		        System.out.print("좌석을 선택하세요. >>>>>>>  ");
 		        // 좌석 사용 여부 메소드 불러오기
-		        usage_YN();
+		       
 		        // conn 정리
 		        conn.close();
 		    } catch (Exception e) {
@@ -147,8 +152,8 @@ public class ServiceManager {
 		}
 
 		//좌석 사용여부
-		public void usage_YN() {
-		    SeatServiceManager ssm = new SeatServiceManager();
+		public int usage_YN() {
+		    
 
 			String inputNum = Main.SC.nextLine().trim();
 			int input = Integer.parseInt(inputNum);
@@ -172,7 +177,8 @@ public class ServiceManager {
 		            seatNum = rs1.getInt("SEAT_NUM");
 		            if (USAGE_YN.equals("Y")) {
 		                System.out.println("이미 사용 중인 좌석입니다. ");
-		                showSeat();
+		                conn.close();
+		                return 0 ;
 		            } else {
 		            	
 		                System.out.println(seatNum + "번 좌석을 선택하셨습니다.");
@@ -194,9 +200,12 @@ public class ServiceManager {
 		     		 		       rs2.next();
 		     		 		       useNum = rs2.getInt("USE_NUM");
 		     		 		       conn.commit();
-		        		        	ssm.afterChooseSeat();
+		     		 		      conn.close();
+		        		        	return 1;
 		        		        } else {
 		        		        	System.out.println("이용 실패");
+		        		        	 conn.close();
+		        		        	return 0;
 		        			    }
 		            }
 		            
@@ -206,9 +215,11 @@ public class ServiceManager {
 		            
 		          
 		        // conn 정리
-		        conn.close();
+		        
 		    } catch (Exception e) {
+		    	
 		    	System.err.println("Error: " + e.getMessage());
+		    	return 0;
 		    }
 		}
 		

@@ -1,19 +1,24 @@
-package pcCafe.useStatus.seatservice;
+package pcCafe.product;
 
+import java.sql.Connection;
+import java.util.Scanner;
 
-import pcCafe.product.PurchaseProduct;
-import pcCafe.useStatus.SeatServiceManager;
+import pcCafe.main.JdbcTemplate;
 
-public class OrderProduct {
-	
-	public void orderFood() {
+public class ProductMain {
+	public void prooduct() {
 		
-		
+		JdbcTemplate j = new JdbcTemplate();
+		Connection conn = j.getConnection();
+		Scanner sc = new Scanner(System.in);
 		PurchaseProduct pp = new PurchaseProduct();
 		
-//상품 보여주기
+		System.out.println("=====상품주문=====");
+		
+		//상품 보여주기
 		try {
 			pp.showProduct();
+			conn.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -22,6 +27,7 @@ public class OrderProduct {
 		//주문 번호 생성
 		try {
 			pp.createOrder();
+			conn.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -30,6 +36,7 @@ public class OrderProduct {
 		//장바구니(주문내역)
 		try {
 			pp.addCart();
+			conn.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,6 +45,7 @@ public class OrderProduct {
 		//추가 구매
 		try {
 			pp.addPurchase();
+			conn.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,14 +57,20 @@ public class OrderProduct {
 		//결제종료
 		try {
 			pp.finishPay();
+			conn.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("상품을 준비하는 중입니다......");
 		
+		//자원 정리
 		
+		System.out.println("프로그램 종료");
 		
-		}
-
+	}
+	
 }
+	
+
+

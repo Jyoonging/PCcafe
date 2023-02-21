@@ -18,18 +18,21 @@ public class StopUse {
 
 	
 	//이용 종료
-	public void stopUse() {
+	public boolean stopUse() {
 		SeatServiceManager ssm = new SeatServiceManager();
 		System.out.println("종료하시겠습니까?");
 		System.out.println("1. 네       2. 아니오");
 		String inputStr = Main.SC.nextLine().trim();
 		int input = Integer.parseInt(inputStr);
-		
-		switch(input) {
-		case 1 : calRemainTime(); 
-				 changeYN();	break;
-		case 2 : ssm.afterChooseSeat(); break;
-		default : System.out.println("다시 선택하세요");
+		if (input ==1) {
+			calRemainTime(); 
+			changeYN(); return false;
+		}else if (input==2) {
+			return true;
+			
+		}else {
+		 System.out.println("다시 선택하세요");
+		 return true;
 		}
 	}
 	

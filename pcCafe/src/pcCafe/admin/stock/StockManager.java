@@ -16,7 +16,7 @@ public class StockManager {
 			System.out.println("==================================");
 			System.out.println("=========상품 관리 번호를 선택=========");
 			System.out.println("|| 1.목록 보기, 2.수량 추가, 3.가격변경||");
-			System.out.println("|| 4.상품 추가, 5.로그 보기, 9.뒤로가기||");
+			System.out.println("|| 4.상품 추가,           9.뒤로가기||");
 			System.out.println("==================================");
 			System.out.print(" :  "   );
 			String select = Main.SC.nextLine().trim();
@@ -29,9 +29,6 @@ public class StockManager {
 				ss.price();
 			}else if(select.equals("4")) {
 				ss.add();
-			}else if(select.equals("5")){
-				sl.showLog();
-				
 			}else if(select.equals("9")) {
 				run = false;
 			}else {
