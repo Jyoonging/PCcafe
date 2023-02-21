@@ -40,17 +40,6 @@ public class StopUse {
 		Connection conn; //커넥션받기
 		try {
 			conn = JdbcTemplate.getConnection();
-			//END_TIME UPDAEE하기 이용 종료시간 업데이트
-			//정확히 어떤 줄에 업데이트해줄건지. 
-			//결과집합에서 첫째줄의 USE_NUM가져와서 
-//			String sql4 = "SELECT USE_NUM FROM PC_USE WHERE MEM_NUM = ? ORDER BY USE_NUM DESC ";
-//			
-//			PreparedStatement pstmt4 = conn.prepareStatement(sql4);
-//			pstmt4.setInt(1, MemberMenu.memberNum);
-//			ResultSet rs4 = pstmt4.executeQuery();
-//			rs4.next();
-//			//가장 최신의 use_num을 가져와서 저장
-//			ServiceManager.useNum = rs4.getInt("USE_NUM");
 			
 			
 			//useNum에 해당하는 줄의 종료시간을 업데이트
@@ -62,7 +51,7 @@ public class StopUse {
 			if(result5==1) {
 				System.out.println("종료되었습니다.");
 			}else {
-				System.out.println("DB오류입니다.");
+				System.out.println("올바른 값이 아닙니다.");
 			}
 			
 			
@@ -112,12 +101,12 @@ public class StopUse {
 				System.out.println("안녕히 가세요.");
 				System.out.println("--------------------------------");
 			} else {
-				System.out.println("오류발생.");
+				System.out.println("올바른 값이 아닙니다.");
 			}
 			
 			conn.close();
 		} catch (Exception e) {
-	    	System.err.println("Error: " + e.getMessage());
+	    	System.out.println("올바른 값이 아닙니다.");
 		}
 	}
 	
@@ -136,8 +125,7 @@ public class StopUse {
 			pstmt.executeUpdate();
 			conn.commit();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("올바른 값이 아닙니다.");
 		}
 		
 		

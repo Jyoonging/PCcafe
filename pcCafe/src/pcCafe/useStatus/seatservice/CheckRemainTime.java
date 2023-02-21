@@ -68,7 +68,7 @@ public class CheckRemainTime {
 				// conn 정리
 		        conn.close();
 			} catch (Exception e) {
-				System.err.println("Error: " + e.getMessage());
+				System.out.println("올바른 값이 아닙니다.");
 			}
 		}
 	
