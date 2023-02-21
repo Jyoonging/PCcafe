@@ -28,7 +28,9 @@ public class SeatInput {
 		System.out.println("==================================");;
 		System.out.println("==================================");
 		System.out.print  ("  상태 변경할 좌석 번호 : ");
-		int no = Integer.parseInt(Main.SC.nextLine().trim());
+		SeatData data = new SeatData();
+		try{
+			int no = Integer.parseInt(Main.SC.nextLine().trim());
 		System.out.println("==================================");
 		System.out.print("  고장상태(Y/N) : ");
 		String b = Main.SC.nextLine().trim();
@@ -44,13 +46,18 @@ public class SeatInput {
 		String use = Main.SC.nextLine().trim();
 		String u = use.toUpperCase();
 		System.out.println("==================================");
-		SeatData data = new SeatData();
 		data.setBrokenYN(broken);
 		data.setMonitorType(mType);
 		data.setSeatType(smoke);
 		data.setUsageYN(u);
 		data.setSeatNum(no);
 		return data;
+		}catch(Exception e) {
+			System.out.println("==================================");
+			System.out.println("||          숫자만 입력하세요       ||");
+			System.out.println("==================================");
+		}
+		return  data;
 	}
 
 }
