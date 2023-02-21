@@ -13,6 +13,8 @@ import pcCafe.main.Main;
 import pcCafe.main.MemberController;
 import pcCafe.main.MemberData;
 import pcCafe.main.MemberMenu;
+import pcCafe.product.PurchaseProduct;
+import pcCafe.time.PurchaseTime;
 
 public class ServiceManager {
 	
@@ -57,10 +59,13 @@ public class ServiceManager {
 			System.out.println("=====================================================================================================");
 			System.out.print("메뉴를 선택하세요. > ");
 			
+			PurchaseTime pt = new PurchaseTime();
 			while(true) {
-				int input = Main.SC.nextInt();
+				String inputStr = Main.SC.nextLine().trim();
+				int input = Integer.parseInt(inputStr);
 				if(input == 1) {
-					fee();}
+					pt.showTimeTable();
+					}
 					else if(input == 2) { 
 					chooseSeat();
 					}else if(input == 3) { 

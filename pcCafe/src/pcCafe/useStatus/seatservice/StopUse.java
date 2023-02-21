@@ -22,7 +22,9 @@ public class StopUse {
 		SeatServiceManager ssm = new SeatServiceManager();
 		System.out.println("종료하시겠습니까?");
 		System.out.println("1. 네       2. 아니오");
-		int input = Main.SC.nextInt();
+		String inputStr = Main.SC.nextLine().trim();
+		int input = Integer.parseInt(inputStr);
+		
 		switch(input) {
 		case 1 : calRemainTime(); 
 				 changeYN();	break;
