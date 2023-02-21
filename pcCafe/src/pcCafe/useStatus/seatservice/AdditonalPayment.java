@@ -60,7 +60,8 @@ public class AdditonalPayment {
 			try {
 				TimeData data = new TimeData();
 				System.out.print("요금제를 선택하세요.:");
-				int feeInput = Main.SC.nextInt();
+				String inputNum = Main.SC.nextLine().trim();
+				int feeInput = Integer.parseInt(inputNum);
 				data.setFeeNum(feeInput);
 					
 				//feeNum을 받는 동시에 timeAddMin구하기 가능함
@@ -143,6 +144,7 @@ public class AdditonalPayment {
 			pstmt.setInt(2, MemberMenu.memberNum); //SQLException e
 			
 			int result = pstmt.executeUpdate(); //SQLException e
+			conn.commit();
 			System.out.println("3");
 			if(result == 1) {
 				updateTimeDate(data);
@@ -217,6 +219,7 @@ public class AdditonalPayment {
 					pstmt4.setInt(1, totalT);
 					pstmt4.setInt(2, MemberMenu.memberNum);
 					int result = pstmt4.executeUpdate();
+					conn.commit();
 					if(result == 1) {
 						System.out.println(data.getTimeAddMin() +"분이 추가되었습니다.");
 						System.out.println("남은 시간 : " + totalT + "분");

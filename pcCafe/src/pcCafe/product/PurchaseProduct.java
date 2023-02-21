@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 
 import pcCafe.main.JdbcTemplate;
+import pcCafe.useStatus.seatservice.AdditonalPayment;
 import pcCafe.useStatus.seatservice.StopUse;
 
 public class PurchaseProduct {
@@ -39,12 +40,14 @@ public class PurchaseProduct {
 		JdbcTemplate j = new JdbcTemplate();
 		Connection conn = j.getConnection();
 	
+		//
 		//결제내역번호 생성
 		String sql1 = "INSERT INTO PRODUCT_PAYMENT(PP_NUM, USE_NUM) VALUES(PP_NUM_SEQ.NEXTVAL,?)";
 		
 		PreparedStatement pstmt1 = conn.prepareStatement(sql1);
-		pstmt1.setInt(1, 1); //!!!!!!!!!!깡분님 이용번호 받아서 수정!!!!!!!!!!
+		pstmt1.setInt(1, AdditonalPayment.useNum); //!!!!!!!!!!깡분님 이용번호 받아서 수정!!!!!!!!!!
 		int result1 = pstmt1.executeUpdate();
+		conn.commit();
 
 	}
 	
@@ -115,6 +118,7 @@ public class PurchaseProduct {
 		pstmt3.setInt(2, ppNum);
 		pstmt3.setInt(3, selectPqty);
 		int result2 = pstmt3.executeUpdate();
+	
 		
 		System.out.println("\n=====장바구니=====");
 		
