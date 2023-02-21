@@ -66,7 +66,7 @@ public class SeatService {
 				System.out.println("==================================");
 			}else {
 				System.out.println("==================================");
-				System.out.println("||    입력 오류,  Y/N 확인하세요     ||");
+				System.out.println("||            입력 오류           ||");
 				System.out.println("==================================");
 			}
 			conn.close();
