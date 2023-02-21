@@ -23,6 +23,7 @@ public class ServiceManager {
     MemberMenu mm = new MemberMenu();
     SeatServiceManager ssm = new SeatServiceManager();
     public static int seatNum;
+    public static int useNum;
     
     	//회원고유번호 변수 지정
   		public int memberNum() {
@@ -75,10 +76,6 @@ public class ServiceManager {
 			}
 		}
 		
-		// 요금 선택
-		public void fee() {
-			System.out.println("나중에 예린님거 추가~~");
-		};
 		
 		//좌석 선택
 		public void chooseSeat() {
@@ -162,17 +159,19 @@ public class ServiceManager {
 		    String sql2 = "INSERT INTO PC_USE(USE_NUM,SEAT_NUM,MEM_NUM, PC_STARTTIME) VALUES(PC_USE_SEQ.NEXTVAL,?,?,SYSDATE)";
 		    // 좌석 선택 성공 시 멤버테이블 사용 여부 업데이트
 		    String sql3 = "UPDATE SEAT SET USAGE_YN = 'Y' WHERE SEAT_NUM = ?";
+		    // 이용 번호 조회
+		    String sql4 = "SELECT USE_NUM FROM PC_USE WHERE MEM_NUM = ? ORDER BY USE_NUM DESC";
 		    Connection conn;
 		    try {
 		        conn = JdbcTemplate.getConnection();
 		        PreparedStatement pstmt1 = conn.prepareStatement(sql1);
 		        pstmt1.setInt(1, input);
-		        ResultSet rs = pstmt1.executeQuery();
+		        ResultSet rs1 = pstmt1.executeQuery();
 		        
 		        // 결과 꺼내서 사용 여부 알려주기
-		        rs.next();
-		            String USAGE_YN = rs.getString("USAGE_YN");
-		            seatNum = rs.getInt("SEAT_NUM");
+		        rs1.next();
+		            String USAGE_YN = rs1.getString("USAGE_YN");
+		            seatNum = rs1.getInt("SEAT_NUM");
 		            if (USAGE_YN.equals("Y")) {
 		                System.out.println("이미 사용 중인 좌석입니다. ");
 		                showSeat();
@@ -195,6 +194,15 @@ public class ServiceManager {
 		        		        	System.out.println("이용 실패");
 		        			    }
 		            }
+		            
+	            //SQL4에서 USE_NUM 가져오기
+		       PreparedStatement pstmt4 = conn.prepareStatement(sql4);
+		       pstmt4.setInt(1, MemberMenu.memberNum);
+		       ResultSet rs2 = pstmt4.executeQuery();
+		       rs2.next();
+		       useNum = rs2.getInt("USE_NUM");
+		            
+		            
 		          
 		        // conn 정리
 		        conn.close();
