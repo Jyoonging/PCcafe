@@ -30,7 +30,11 @@ public class MemberMenu {
 	        switch (input) {
 	            case "1" : ds.join(); break;
 	            case "2" : memberNum = ds.login();
-	            			sm.showMenu(); break;
+	            			if(memberNum != 0) {
+	            				sm.showMenu(); break;
+	            			}else {
+	            				AdminMain.Exception();
+	            			}
 	            case "3" : break;
 	            case "4" : break;
 	            case "5" : am.adminmain(); break;
