@@ -66,10 +66,12 @@ public class ServiceManager {
 					if(input == 1) {
 						run = pt.showTimeTable();
 					}else if(input == 2) { 
-						chooseSeat();
-						int go = usage_YN();
-						if( go == 1) {
-							ssm.afterChooseSeat();
+						if(chooseSeat()) {
+							
+							int go = usage_YN();
+							if( go == 1) {
+								ssm.afterChooseSeat();
+							}
 						}
 					}else if(input == 3) { 
 						run = false; 
@@ -86,7 +88,7 @@ public class ServiceManager {
 		
 		
 		//좌석 선택
-		public void chooseSeat() {
+		public boolean chooseSeat() {
 		    // 적립 시간 조회
 		    String sql = "SELECT MEM_TIME FROM MEMBER WHERE MEM_NUM = ?";
 		    Connection conn = JdbcTemplate.getConnection();
@@ -101,13 +103,14 @@ public class ServiceManager {
 				        if (memTime == 0) {
 				        	System.out.println("남은 시간이 없습니다.");
 				        	System.out.println("결제를 먼저 해주세요");
+				        	return false;
 				        } else if(memTime != 0) {
-				        	showSeat();
-				        }
+				        	showSeat();return true;
+				        }else {return false;}
 				    
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.println("올바른 값 입력하세요");
+				return false;
 			}
 		   
 		}
