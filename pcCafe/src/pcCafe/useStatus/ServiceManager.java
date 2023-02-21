@@ -4,29 +4,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
 
 import pcCafe.main.JdbcTemplate;
 import pcCafe.main.Main;
 import pcCafe.main.MemberController;
 import pcCafe.main.MemberData;
 import pcCafe.main.MemberMenu;
-import pcCafe.product.PurchaseProduct;
 import pcCafe.time.PurchaseTime;
 
 public class ServiceManager {
 	
 	static MemberController ds = new MemberController();
-    private MemberData MD = new MemberData();
-    MemberMenu mm = new MemberMenu();
-    SeatServiceManager ssm = new SeatServiceManager();
+	 
     public static int seatNum;
     public static int useNum;
     
     	//회원고유번호 변수 지정
   		public int memberNum() {
+  			MemberData MD = new MemberData();
   			Connection conn;
   			try {
   				conn = JdbcTemplate.getConnection();
@@ -153,6 +148,8 @@ public class ServiceManager {
 
 		//좌석 사용여부
 		public void usage_YN() {
+		    SeatServiceManager ssm = new SeatServiceManager();
+
 			String inputNum = Main.SC.nextLine().trim();
 			int input = Integer.parseInt(inputNum);
 			// 저장된 좌석 번호로 사용 여부 조회
@@ -182,7 +179,7 @@ public class ServiceManager {
 				        PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 				        pstmt2.setInt(1,seatNum);
 				        pstmt2.setInt(2,MemberMenu.memberNum);
-				        int result1 = pstmt2.executeUpdate();
+				        pstmt2.executeUpdate();
 				        conn.commit();
 				        //좌선 선택함과 동시에 좌석테이블 사용 여부 업데이트
 				        PreparedStatement pstmt3 = conn.prepareStatement(sql3);

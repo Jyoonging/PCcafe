@@ -1,13 +1,6 @@
 package pcCafe.useStatus;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import pcCafe.main.JdbcTemplate;
 import pcCafe.main.Main;
 import pcCafe.useStatus.seatservice.AdditonalPayment;
 import pcCafe.useStatus.seatservice.CheckRemainTime;
@@ -16,13 +9,13 @@ import pcCafe.useStatus.seatservice.StopUse;
 
 public class SeatServiceManager {
 	
-	OrderProduct op = new OrderProduct();
-	CheckRemainTime crt = new CheckRemainTime();
-	AdditonalPayment ap = new AdditonalPayment();
-	StopUse su = new StopUse();
 	
 	// 좌석 선택 시 나오는 화면
 	public void afterChooseSeat() {
+		OrderProduct op = new OrderProduct();
+		CheckRemainTime crt = new CheckRemainTime();
+		AdditonalPayment ap = new AdditonalPayment();
+		StopUse su = new StopUse();
 		
 		System.out.println("====================================  회원메뉴 >   ====================================================");
 		System.out.println("                                                                                       "); 

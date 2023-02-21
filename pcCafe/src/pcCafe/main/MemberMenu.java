@@ -1,6 +1,5 @@
 package pcCafe.main;
 
-import java.util.Scanner;
 
 import pcCafe.admin.AdminMain;
 import pcCafe.useStatus.ServiceManager;
@@ -36,7 +35,6 @@ public class MemberMenu {
 	            				AdminMain.Exception();
 	            			}
 	            case "3" : break;
-	            case "4" : break;
 	            case "5" : am.adminmain(); break;
 	            default :
 	                System.out.println("잘못 입력하셨습니다");

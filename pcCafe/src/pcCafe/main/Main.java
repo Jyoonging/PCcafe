@@ -1,9 +1,7 @@
 package pcCafe.main;
 
-import java.sql.Connection;
 import java.util.Scanner;
 
-import pcCafe.useStatus.ServiceManager;
 
 public class Main {
 
@@ -12,7 +10,6 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		Connection conn = JdbcTemplate.getConnection();
 
         MemberMenu mm = new MemberMenu();
         while(true){

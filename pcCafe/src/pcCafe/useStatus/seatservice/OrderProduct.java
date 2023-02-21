@@ -1,8 +1,6 @@
 package pcCafe.useStatus.seatservice;
 
-import java.sql.Connection;
 
-import pcCafe.main.JdbcTemplate;
 import pcCafe.product.PurchaseProduct;
 import pcCafe.useStatus.SeatServiceManager;
 
@@ -10,10 +8,7 @@ public class OrderProduct {
 	
 	public void orderFood() {
 		
-		System.out.println("지웅님 파트 끌고오기~~");
 		
-		JdbcTemplate j = new JdbcTemplate();
-		Connection conn = j.getConnection();
 		PurchaseProduct pp = new PurchaseProduct();
 		
 //상품 보여주기
