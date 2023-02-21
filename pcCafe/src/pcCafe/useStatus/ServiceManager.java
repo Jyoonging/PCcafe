@@ -118,19 +118,22 @@ public class ServiceManager {
 		// 좌석 배열 보여주기 (select 좌석 정보)
 		public void showSeat() {
 		    // SQL 실행
-		    String sql = "SELECT SEAT_NUM, SEAT_TYPE, USAGE_YN FROM SEAT";
+		    String sql1 = "SELECT BROKEN_YN, SEAT_NUM, SEAT_TYPE, USAGE_YN FROM SEAT WHERE BROKEN_YN = 'N' ";
+		    String sql2 = "SELECT SEAT_NUM,BROKEN_YN FROM SEAT WHERE BROKEN_YN = 'Y'";
 		    Connection conn;
 		    try {
 		        conn = JdbcTemplate.getConnection();
-		        PreparedStatement pstmt = conn.prepareStatement(sql);
-		        ResultSet rs = pstmt.executeQuery();
+		        PreparedStatement pstmt1 = conn.prepareStatement(sql1);
+		        ResultSet rs1 = pstmt1.executeQuery();
 
 		        // 결과집합에서 데이터 꺼내기
-		        while(rs.next()){
-		            int seatNum = rs.getInt("SEAT_NUM");
-		            String SEAT_TYPE = rs.getString("SEAT_TYPE");
-		            String USAGE_YN = rs.getString("USAGE_YN");
-
+		        while(rs1.next()){
+		            int seatNum = rs1.getInt("SEAT_NUM");
+		            String SEAT_TYPE = rs1.getString("SEAT_TYPE");
+		            String USAGE_YN = rs1.getString("USAGE_YN");
+		            String BROKEN_YN = rs1.getString("BROKEN_YN");
+		            
+		            
 		            System.out.print(seatNum + "번" + " ◻︎ ");
 		            System.out.print(" || ");
 
@@ -147,7 +150,21 @@ public class ServiceManager {
 		            } else {
 		                System.out.println("사용 가능");
 		            }
+		        
 		        }
+		            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+		            ResultSet rs2 = pstmt2.executeQuery();
+		            
+		            rs2.next();
+		            int SEAT_NUM = rs2.getInt("SEAT_NUM");
+		            String BROKEN_YN = rs2.getString("BROKEN_YN");
+		            
+		            System.out.println();
+		            if(BROKEN_YN.equals("Y")) {
+		            	System.out.println(SEAT_NUM + "번 좌석 : " + "고장! 수리 중..");
+		            } 
+		        
+		        
 		        System.out.println();
 		        System.out.print("좌석을 선택하세요. >>>>>>>  ");
 		        // 좌석 사용 여부 메소드 불러오기
