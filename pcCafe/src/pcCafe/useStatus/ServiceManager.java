@@ -169,7 +169,6 @@ public class ServiceManager {
 		        PreparedStatement pstmt1 = conn.prepareStatement(sql1);
 		        pstmt1.setInt(1, input);
 		        ResultSet rs1 = pstmt1.executeQuery();
-		        
 		        // 결과 꺼내서 사용 여부 알려주기
 		        rs1.next();
 		            String USAGE_YN = rs1.getString("USAGE_YN");
@@ -178,6 +177,7 @@ public class ServiceManager {
 		                System.out.println("이미 사용 중인 좌석입니다. ");
 		                showSeat();
 		            } else {
+		            	
 		                System.out.println(seatNum + "번 좌석을 선택하셨습니다.");
 				        PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 				        pstmt2.setInt(1,seatNum);
@@ -191,6 +191,12 @@ public class ServiceManager {
 				        conn.commit();
 		        		        if(result2 ==1) {
 		        		        	System.out.println("이용이 시작되었습니다.");
+		        		        	PreparedStatement pstmt4 = conn.prepareStatement(sql4);
+		     		 		       pstmt4.setInt(1, MemberMenu.memberNum);
+		     		 		       ResultSet rs2 = pstmt4.executeQuery();
+		     		 		       rs2.next();
+		     		 		       useNum = rs2.getInt("USE_NUM");
+		     		 		       conn.commit();
 		        		        	ssm.afterChooseSeat();
 		        		        } else {
 		        		        	System.out.println("이용 실패");
@@ -198,11 +204,7 @@ public class ServiceManager {
 		            }
 		            
 	            //SQL4에서 USE_NUM 가져오기
-		       PreparedStatement pstmt4 = conn.prepareStatement(sql4);
-		       pstmt4.setInt(1, MemberMenu.memberNum);
-		       ResultSet rs2 = pstmt4.executeQuery();
-		       rs2.next();
-		       useNum = rs2.getInt("USE_NUM");
+		       
 		            
 		            
 		          

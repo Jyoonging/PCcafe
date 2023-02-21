@@ -197,9 +197,7 @@ public final class PurchaseTime {
 		
 
 		pstmt.setInt(1, data.getFeeNum()); //SQLException e
-		
 		pstmt.setInt(2, loginMemNum); //SQLException e
-		
 		int result = pstmt.executeUpdate(); //SQLException e
 		
 		if(result ==1) {
