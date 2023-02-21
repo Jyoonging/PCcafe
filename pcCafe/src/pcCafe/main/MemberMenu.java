@@ -3,11 +3,11 @@ package pcCafe.main;
 import java.util.Scanner;
 
 import pcCafe.admin.AdminMain;
+import pcCafe.useStatus.ServiceManager;
 
 public class MemberMenu {
 	
 		public static int memberNum;
-		
 	    MemberController ds = new MemberController();
 	    public boolean startService() throws Exception{
 	        //선택지 보여주기
@@ -25,10 +25,12 @@ public class MemberMenu {
 	    }
 
 	    private void processService(String input) throws Exception {
+	    	ServiceManager sm = new ServiceManager();
 	    	AdminMain am = new AdminMain();
 	        switch (input) {
 	            case "1" : ds.join(); break;
 	            case "2" : memberNum = ds.login();
+	            			sm.showMenu(); break;
 	            case "3" : break;
 	            case "4" : break;
 	            case "5" : am.adminmain(); break;
