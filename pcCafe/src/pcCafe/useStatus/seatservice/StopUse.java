@@ -3,6 +3,7 @@ package pcCafe.useStatus.seatservice;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,9 +11,11 @@ import pcCafe.main.JdbcTemplate;
 import pcCafe.main.Main;
 import pcCafe.main.MemberMenu;
 import pcCafe.useStatus.SeatServiceManager;
+import pcCafe.useStatus.ServiceManager;
 
 public class StopUse {
 	
+	public static int useNum;
 	
 	//이용 종료
 	public void stopUse() {
@@ -21,11 +24,11 @@ public class StopUse {
 		System.out.println("1. 네       2. 아니오");
 		int input = Main.SC.nextInt();
 		switch(input) {
-		case 1 : calRemainTime(); break;
+		case 1 : calRemainTime(); 
+				 changeYN();	break;
 		case 2 : ssm.afterChooseSeat(); break;
 		default : System.out.println("다시 선택하세요");
 		}
-		
 	}
 	
 	public void calRemainTime() {
@@ -42,7 +45,7 @@ public class StopUse {
 			ResultSet rs4 = pstmt4.executeQuery();
 			rs4.next();
 			//가장 최신의 use_num을 가져와서 저장
-			int useNum = rs4.getInt("USE_NUM");
+			useNum = rs4.getInt("USE_NUM");
 			
 			System.out.println(useNum);
 			
@@ -64,6 +67,7 @@ public class StopUse {
 			//회원번호에 맞는 회원의 적립시간을 바꿔줌
 			String sql3 = "UPDATE MEMBER SET MEM_TIME = ? WHERE MEM_NUM = ?";
 			
+			//SQL1
 			PreparedStatement pstmt1 = conn.prepareStatement(sql1);
 			pstmt1.setInt(1,useNum);
 			ResultSet rs1 = pstmt1.executeQuery();
@@ -78,11 +82,8 @@ public class StopUse {
 			
 			long time1 = startDate.getTime();
 			long time2 = endDate.getTime();
-			
 			long diff = time2-time1;
-			
 			long diffMin = (diff/1000)/60%60;
-			
 			int diffMin2 = (int)diffMin;
 			
 			// 적립 시간 꺼내와서 적립시간 - DIFFMIN
@@ -106,11 +107,36 @@ public class StopUse {
 			} else {
 				System.out.println("오류발생.");
 			}
-	
+			
 			conn.close();
 		} catch (Exception e) {
 	    	System.err.println("Error: " + e.getMessage());
 		}
 	}
+	
+	public void changeYN() {
+		
+		Connection conn;
+		conn = JdbcTemplate.getConnection();
+		//이용 종료 시 좌석 사용 여부 업데이트
+		String sql = "UPDATE SEAT SET USAGE_YN = 'N' WHERE SEAT_NUM = ?";
+		
+		//sql1
+		PreparedStatement pstmt;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,ServiceManager.seatNum);
+			int result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+	
+	
 
 }

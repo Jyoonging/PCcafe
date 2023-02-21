@@ -4,6 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
 
+import pcCafe.main.JdbcTemplate;
+import pcCafe.useStatus.seatservice.StopUse;
+
 public class PurchaseProduct {
 	
 	public static final Scanner SC = new Scanner(System.in);
@@ -38,8 +41,9 @@ public class PurchaseProduct {
 	
 		//결제내역번호 생성
 		String sql1 = "INSERT INTO PRODUCT_PAYMENT(PP_NUM, USE_NUM) VALUES(PP_NUM_SEQ.NEXTVAL,?)";
+		
 		PreparedStatement pstmt1 = conn.prepareStatement(sql1);
-		pstmt1.setInt(1, 1); //!!!!!!!!!!깡분님 이용번호 받아서 수정!!!!!!!!!!
+		pstmt1.setInt(1, StopUse.useNum); //!!!!!!!!!!깡분님 이용번호 받아서 수정!!!!!!!!!!
 		int result1 = pstmt1.executeUpdate();
 
 	}

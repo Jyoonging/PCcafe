@@ -8,11 +8,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import adminPrj.admin.time.TimeData;
 import pcCafe.main.JdbcTemplate;
 import pcCafe.main.Main;
 import pcCafe.main.MemberMenu;
 import pcCafe.useStatus.SeatServiceManager;
-import pcCafe.useStatus.Timedata;
+
 
 public class AdditonalPayment {
 	
@@ -57,7 +58,7 @@ public class AdditonalPayment {
 		//timeMin: 	회원테이블에서 받아온 적립시간
 		public void inputFee() {
 			try {
-				Timedata data = new Timedata();
+				TimeData data = new TimeData();
 				System.out.print("요금제를 선택하세요.:");
 				int feeInput = Main.SC.nextInt();
 				data.setFeeNum(feeInput);
@@ -110,7 +111,7 @@ public class AdditonalPayment {
 			//timeAddMin과timeMin과feeNum을 한꺼번에 데이터로 관리하기
 		}	
 		
-		public void getInfo(Timedata data) {
+		public void getInfo(TimeData data) {
 			System.out.print(data.getTimeAddMin()+"분, "+data.getTimePrice()+"원 결제 하시겠습니까? (y/n)");
 			String input = sc2.nextLine().trim();
 			if(input.equalsIgnoreCase("y")) {
@@ -127,7 +128,7 @@ public class AdditonalPayment {
 		}
 		
 		//시간권 결제내역테이블에 결제 내역 추가하기
-		public void addPayList(Timedata data) {
+		public void addPayList(TimeData data) {
 			try {
 			//커넥션 받아오기
 			Connection conn = JdbcTemplate.getConnection(); //Exception e 
@@ -138,12 +139,12 @@ public class AdditonalPayment {
 			PreparedStatement pstmt = conn.prepareStatement(sql); //SQLException e
 			
 			pstmt.setInt(1, data.getFeeNum()); //SQLException e
-			
+			System.out.println("2");
 			pstmt.setInt(2, MemberMenu.memberNum); //SQLException e
 			
 			int result = pstmt.executeUpdate(); //SQLException e
-			
-			if(result ==1) {
+			System.out.println("3");
+			if(result == 1) {
 				updateTimeDate(data);
 			}else {
 				System.out.println("결제 실패. 전단계로 돌아갑니다.");
@@ -164,19 +165,18 @@ public class AdditonalPayment {
 		}
 		//추가시간 적립하기 
 		//memNum이라는 값을 받아오게 만들었음. 
-		public void updateTimeDate(Timedata data){
+		public void updateTimeDate(TimeData data){
 			SeatServiceManager ssm = new SeatServiceManager();
 			Connection conn;
 			try{
 				conn = JdbcTemplate.getConnection();//exception
 				String sql3 = "SELECT USE_NUM FROM PC_USE WHERE MEM_NUM = ? ORDER BY USE_NUM DESC ";
-				
 				PreparedStatement pstmt3 = conn.prepareStatement(sql3);
 				pstmt3.setInt(1, MemberMenu.memberNum);
 				ResultSet rs3 = pstmt3.executeQuery();
 				rs3.next();
 				//가장 최신의 use_num을 가져와서 저장
-				int useNum = rs3.getInt("USE_NUM");
+				StopUse.useNum = rs3.getInt("USE_NUM");
 				
 				//SQL문 작성(update) : 적립시간에 결제시간 더한 값 회원정보에 업데이트하기 
 				//(시간권 결제한 시간 + (적립시간-(현재시간-사용시작시간 = 현재까지 이용한 시간)))
@@ -186,7 +186,7 @@ public class AdditonalPayment {
 				PreparedStatement pstmt1 = conn.prepareStatement(sql1); 
 				PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 				PreparedStatement pstmt4 = conn.prepareStatement(sql4);
-				pstmt1.setInt(1, useNum);
+				pstmt1.setInt(1, StopUse.useNum);
 				ResultSet rs1 = pstmt1.executeQuery();
 				rs1.next();
 					String startTime=rs1.getString("S_TIME");
