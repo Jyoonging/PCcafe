@@ -9,10 +9,11 @@ import javax.print.attribute.IntegerSyntax;
 
 import adminPrj.admin.time.TimeData;
 import pcCafe.main.*;
+import pcCafe.useStatus.ServiceManager;
 
 public final class PurchaseTime {
 
-	public static int loginMemNum=3; //실제로는 로그인 시 받아올 숫자임. 해당 메소드를 실행시키기위한 임시 번호 부여
+	public static int loginMemNum=MemberMenu.memberNum; //실제로는 로그인 시 받아올 숫자임. 해당 메소드를 실행시키기위한 임시 번호 부여
 	
 	
 	public void showTimeTable(){
@@ -51,12 +52,14 @@ public final class PurchaseTime {
 	//timePrice: 요금제 번호에 맞는 요금제 가격
 	//timeMin: 	회원테이블에서 받아온 적립시간
 	public void inputFee() {
+		ServiceManager sm = new ServiceManager();
 		try {
 			TimeData data = new TimeData();
 			System.out.print("요금제를 선택하세요.:");
 			String feeInput = Main.SC.nextLine().trim();
 			if(feeInput.equals("0")) {
 				System.out.println("로그인 후 선택화면으로 돌아가기");
+				sm.showMenu();
 			}else {
 			
 				int inputNum = Integer.parseInt(feeInput);
@@ -137,6 +140,10 @@ public final class PurchaseTime {
 			case "1" : payCard(data); break;
 			case "2" : 
 				change = payCash(data); 
+				if(change<0) {
+					System.out.println("결제 실패입니다. 전단계로 돌아갑니다.");
+					showTimeTable();
+				}
 				System.out.println("거스름돈 : "+change +"원");
 				addPayList(data);
 				break;
@@ -207,8 +214,10 @@ public final class PurchaseTime {
 		conn.close(); //SQLException e
 		}catch(SQLException se) {
 			System.out.println("DB문제입니다. 이전 단계로 돌아갑니다.");
+			showTimeTable();
 		}catch(Exception e) {
 			System.out.println("커넥션오류입니다.");
+			showTimeTable();
 		}finally { //오류와 상관없이 무조건 실행되는 구
 			
 		}
@@ -221,7 +230,7 @@ public final class PurchaseTime {
 	public void updateTimeDate(TimeData data){
 		try{
 			Connection conn = JdbcTemplate.getConnection();//exception
-		
+			ServiceManager sm = new ServiceManager();
 		
 			//SQL문 작성(update) : 적립시간에 결제시간 더한 값 회원정보에 업데이트하기 
 			String sql02 ="UPDATE MEMBER SET MEM_TIME =MEM_TIME + ? WHERE MEM_NUM = ?";
@@ -231,7 +240,8 @@ public final class PurchaseTime {
 			int result = pstmt02.executeUpdate(); //se
 			if(result == 1) {
 				System.out.println(data.getTimeAddMin()+"분이 추가되었습니다.");
-				System.out.println("화면전환발생");
+				conn.commit();
+				sm.showMenu();
 				//강분님께 화면 받아서 그 화면으로 돌아가기 
 			}else {
 				System.out.println("오류발생. 전단계로 돌아갑니다.");
