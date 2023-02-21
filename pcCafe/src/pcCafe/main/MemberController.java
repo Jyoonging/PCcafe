@@ -5,7 +5,6 @@ package pcCafe.main;
 	import java.sql.ResultSet;
 	import java.sql.SQLException;
 
-import pcCafe.useStatus.ServiceManager;
 
 	public class MemberController {
 

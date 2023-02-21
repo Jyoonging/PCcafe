@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.print.attribute.IntegerSyntax;
 
 import adminPrj.admin.time.TimeData;
 import pcCafe.main.*;
@@ -13,7 +12,6 @@ import pcCafe.useStatus.ServiceManager;
 
 public final class PurchaseTime {
 
-	public static int loginMemNum=MemberMenu.memberNum; //실제로는 로그인 시 받아올 숫자임. 해당 메소드를 실행시키기위한 임시 번호 부여
 	
 	
 	public void showTimeTable(){
@@ -84,7 +82,7 @@ public final class PurchaseTime {
 				//timeMin받아오기 : 회원테이블의 남은 시간
 				String sql2 = "SELECT MEM_TIME FROM MEMBER WHERE MEM_NUM= ?";
 				PreparedStatement pstmt2 = conn.prepareStatement(sql2); //se
-				pstmt2.setInt(1, loginMemNum); //se
+				pstmt2.setInt(1, MemberMenu.memberNum); //se
 				ResultSet rs2 = pstmt2.executeQuery(); //se
 				if(rs2.next()) { //se
 					data.setTimeMin(rs2.getInt("MEM_TIME")); //se
@@ -197,7 +195,7 @@ public final class PurchaseTime {
 		
 
 		pstmt.setInt(1, data.getFeeNum()); //SQLException e
-		pstmt.setInt(2, loginMemNum); //SQLException e
+		pstmt.setInt(2, MemberMenu.memberNum); //SQLException e
 		int result = pstmt.executeUpdate(); //SQLException e
 		
 		if(result ==1) {
@@ -234,7 +232,7 @@ public final class PurchaseTime {
 			String sql02 ="UPDATE MEMBER SET MEM_TIME =MEM_TIME + ? WHERE MEM_NUM = ?";
 			PreparedStatement pstmt02 = conn.prepareStatement(sql02); //se
 			pstmt02.setInt(1, data.getTimeAddMin()); //se
-			pstmt02.setInt(2, loginMemNum); //se
+			pstmt02.setInt(2, MemberMenu.memberNum); //se
 			int result = pstmt02.executeUpdate(); //se
 			if(result == 1) {
 				System.out.println(data.getTimeAddMin()+"분이 추가되었습니다.");

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 
 import pcCafe.admin.AdminMain;
 import pcCafe.main.JdbcTemplate;
-import pcCafe.main.Main;
 
 
 public class StockLog {
@@ -14,13 +13,12 @@ public class StockLog {
 	
 	
 	public static void log(int qty) {
-		AdminMain am = new AdminMain();
 		try {
 			System.out.println();
 			Connection conn = JdbcTemplate.getConnection();
 			String sql = "INSERT INTO STOCK_MANAGEMENT(STOCK_NUM,STOCK_DATE,ADMIN_NUM,STOCK_QTY) VALUES(STOCK_MANAGEMENT_SEQ.NEXTVAL,SYSDATE,?,?)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, am.adminNum);
+			pstmt.setInt(1, AdminMain.adminNum);
 			pstmt.setInt(2, qty);
 			int result = pstmt.executeUpdate();
 			

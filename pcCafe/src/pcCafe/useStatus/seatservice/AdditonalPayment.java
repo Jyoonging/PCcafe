@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 import adminPrj.admin.time.TimeData;
 import pcCafe.main.JdbcTemplate;
@@ -18,13 +17,12 @@ import pcCafe.useStatus.ServiceManager;
 
 public class AdditonalPayment {
 	
-	ServiceManager sm = new ServiceManager();
+	
 	
 	// 추가결제
 		// 현재 시간-시작시간 = 현재까지 이용한 시간
 		// 새로 결제한 시간권 시간 + 현재까지 이용한 시간 => 적립시간에 업데이트
 		public void showTimeTable(){
-			SeatServiceManager ssm = new SeatServiceManager();
 			try {
 				Connection conn = JdbcTemplate.getConnection();
 				System.out.println("=========피시방 요금===========");
@@ -58,6 +56,7 @@ public class AdditonalPayment {
 		//timePrice: 요금제 번호에 맞는 요금제 가격
 		//timeMin: 	회원테이블에서 받아온 적립시간
 		public void inputFee() {
+			ServiceManager sm = new ServiceManager();
 			try {
 				TimeData data = new TimeData();
 				System.out.print("요금제를 선택하세요.:");

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 
 import pcCafe.admin.AdminMain;
 import pcCafe.main.JdbcTemplate;
-import pcCafe.main.Main;
 import pcCafe.main.MemberData;
 
 

@@ -6,20 +6,16 @@ import java.util.Scanner;
 
 import pcCafe.main.JdbcTemplate;
 import pcCafe.useStatus.ServiceManager;
-import pcCafe.useStatus.seatservice.AdditonalPayment;
-import pcCafe.useStatus.seatservice.StopUse;
 
 public class PurchaseProduct {
 	
 	public static final Scanner SC = new Scanner(System.in);
-	JdbcTemplate j = new JdbcTemplate();
 
 	
 	//상품 보여주기
 	public void showProduct() throws Exception {
 		
-		JdbcTemplate j = new JdbcTemplate();
-		Connection conn = j.getConnection();
+		Connection conn = JdbcTemplate.getConnection();
 		
 		String sql = "SELECT * FROM PRODUCT_LIST";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -38,8 +34,7 @@ public class PurchaseProduct {
 	//주문 생성
 	public void createOrder() throws Exception {
 		
-		JdbcTemplate j = new JdbcTemplate();
-		Connection conn = j.getConnection();
+		Connection conn = JdbcTemplate.getConnection();
 	
 		//
 		//결제내역번호 생성
@@ -47,7 +42,7 @@ public class PurchaseProduct {
 		
 		PreparedStatement pstmt1 = conn.prepareStatement(sql1);
 		pstmt1.setInt(1, ServiceManager.useNum); //!!!!!!!!!!깡분님 이용번호 받아서 수정!!!!!!!!!!
-		int result1 = pstmt1.executeUpdate();
+		pstmt1.executeUpdate();
 		conn.commit();
 
 	}
@@ -84,8 +79,7 @@ public class PurchaseProduct {
 	//장바구니(주문내역)
 	public void addCart() throws Exception {
 		
-		JdbcTemplate j = new JdbcTemplate();
-		Connection conn = j.getConnection();
+		Connection conn = JdbcTemplate.getConnection();
 		
 		
 		//상품 및 수량 선택
@@ -118,7 +112,7 @@ public class PurchaseProduct {
 		pstmt3.setInt(1, selectPnum);
 		pstmt3.setInt(2, ppNum);
 		pstmt3.setInt(3, selectPqty);
-		int result2 = pstmt3.executeUpdate();
+		pstmt3.executeUpdate();
 		conn.commit();
 	
 		
@@ -155,15 +149,13 @@ public class PurchaseProduct {
 		PreparedStatement pstmt7 = conn.prepareStatement(sql7);
 		pstmt7.setInt(1, pQty-selectPqty); //재고 - 입력한 수량
 		pstmt7.setInt(2, selectPnum); //선택한 상품번호
-		int result3 = pstmt7.executeUpdate();
+		pstmt7.executeUpdate();
 		conn.commit();
 	}
 	
 	
 	//추가 구매
 	public void addPurchase() throws Exception {
-		JdbcTemplate j = new JdbcTemplate();
-		Connection conn = j.getConnection();
 		
 		boolean selecting = true;
 		while(selecting) {
@@ -203,28 +195,26 @@ public class PurchaseProduct {
 	//결제 종료 - 가격. 결제시간 인서트
 	public void finishPay() throws Exception {
 		
-		JdbcTemplate j = new JdbcTemplate();
-		Connection conn = j.getConnection();
+		Connection conn = JdbcTemplate.getConnection();
 		
 		//합계 업데이트
 		String sql8 = "UPDATE PRODUCT_PAYMENT SET TOTAL_PRICE = ? WHERE P_PAY_DATE IS NULL";
 		PreparedStatement pstmt8 = conn.prepareStatement(sql8);
 		pstmt8.setInt(1, showTotal());
-		int result4 = pstmt8.executeUpdate();
+		pstmt8.executeUpdate();
 		conn.commit();
 		
 		//결제시간 업데이트
 		String sql9 = "UPDATE PRODUCT_PAYMENT SET P_PAY_DATE = SYSDATE WHERE P_PAY_DATE IS NULL";
 		PreparedStatement pstmt9 = conn.prepareStatement(sql9);
-		int result5 = pstmt9.executeUpdate();
+		pstmt9.executeUpdate();
 		conn.commit();
 	}
 
 	
 	//결제내역번호 추출
 	public int exportPpNum() throws Exception {
-		JdbcTemplate j = new JdbcTemplate();
-		Connection conn = j.getConnection();
+		Connection conn = JdbcTemplate.getConnection();
 		
 		String sql2 = "SELECT PP_NUM FROM PRODUCT_PAYMENT WHERE P_PAY_DATE IS NULL";
 		PreparedStatement pstmt2 = conn.prepareStatement(sql2);
@@ -236,8 +226,7 @@ public class PurchaseProduct {
 	
 	//합계
 	public int showTotal() throws Exception {
-		JdbcTemplate j = new JdbcTemplate();
-		Connection conn = j.getConnection();
+		Connection conn = JdbcTemplate.getConnection();
 		
 		String sql5 = "SELECT SUM(P_PRICE*O_QTY) 합계 "
 				+ "FROM ORDERED_PRODUCT O JOIN PRODUCT_LIST P "
@@ -253,8 +242,7 @@ public class PurchaseProduct {
 	
 	//상품테이블에서 재고 뽑기
 	public int exportPqty(int selectPnum) throws Exception {
-		JdbcTemplate j = new JdbcTemplate();
-		Connection conn = j.getConnection();
+		Connection conn = JdbcTemplate.getConnection();
 		
 		String sql6 = "SELECT P_QTY FROM PRODUCT_LIST WHERE P_NUM = ?";
 		PreparedStatement pstmt6 = conn.prepareStatement(sql6);
@@ -267,8 +255,7 @@ public class PurchaseProduct {
 	
 	//상품테이블에서 항목 개수 세기
 	public int exportPnum() throws Exception {
-		JdbcTemplate j = new JdbcTemplate();
-		Connection conn = j.getConnection();
+		Connection conn = JdbcTemplate.getConnection();
 		
 		String sql10 = "SELECT COUNT(*) 품목개수 FROM PRODUCT_LIST";
 		PreparedStatement pstmt10 = conn.prepareStatement(sql10);
