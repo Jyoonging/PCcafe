@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 
 import pcCafe.main.JdbcTemplate;
+import pcCafe.useStatus.ServiceManager;
 import pcCafe.useStatus.seatservice.AdditonalPayment;
 import pcCafe.useStatus.seatservice.StopUse;
 

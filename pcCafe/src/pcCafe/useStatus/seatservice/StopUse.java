@@ -40,26 +40,28 @@ public class StopUse {
 			//END_TIME UPDAEE하기 이용 종료시간 업데이트
 			//정확히 어떤 줄에 업데이트해줄건지. 
 			//결과집합에서 첫째줄의 USE_NUM가져와서 
-			String sql4 = "SELECT USE_NUM FROM PC_USE WHERE MEM_NUM = ? ORDER BY USE_NUM DESC ";
-			
-			PreparedStatement pstmt4 = conn.prepareStatement(sql4);
-			pstmt4.setInt(1, MemberMenu.memberNum);
-			ResultSet rs4 = pstmt4.executeQuery();
-			rs4.next();
-			//가장 최신의 use_num을 가져와서 저장
-			AdditonalPayment.useNum = rs4.getInt("USE_NUM");
+//			String sql4 = "SELECT USE_NUM FROM PC_USE WHERE MEM_NUM = ? ORDER BY USE_NUM DESC ";
+//			
+//			PreparedStatement pstmt4 = conn.prepareStatement(sql4);
+//			pstmt4.setInt(1, MemberMenu.memberNum);
+//			ResultSet rs4 = pstmt4.executeQuery();
+//			rs4.next();
+//			//가장 최신의 use_num을 가져와서 저장
+//			ServiceManager.useNum = rs4.getInt("USE_NUM");
 			
 			
 			//useNum에 해당하는 줄의 종료시간을 업데이트
 			String sql5 = "UPDATE PC_USE SET PC_ENDTIME = SYSDATE WHERE USE_NUM = ?";
 			PreparedStatement pstmt5 = conn.prepareStatement(sql5);
-			pstmt5.setInt(1, AdditonalPayment.useNum);
+			pstmt5.setInt(1, ServiceManager.useNum);
 			int result5 = pstmt5.executeUpdate();
+			conn.commit();
 			if(result5==1) {
 				System.out.println("종료되었습니다.");
 			}else {
 				System.out.println("DB오류입니다.");
 			}
+			
 			
 			//시작시간, 종료시간 조회
 			String sql1 ="SELECT TO_CHAR(PC_STARTTIME,'DD HH24:MI:SS') AS S_TIME, TO_CHAR(PC_ENDTIME,'DD HH24:MI:SS')AS E_TIME FROM PC_USE WHERE USE_NUM = ?";
@@ -70,7 +72,7 @@ public class StopUse {
 			
 			//SQL1
 			PreparedStatement pstmt1 = conn.prepareStatement(sql1);
-			pstmt1.setInt(1,AdditonalPayment.useNum);
+			pstmt1.setInt(1, ServiceManager.useNum);
 			ResultSet rs1 = pstmt1.executeQuery();
 			rs1.next();
 			String startTime=rs1.getString("S_TIME");
@@ -100,6 +102,7 @@ public class StopUse {
 			pstmt3.setInt(1,rtime); 
 			pstmt3.setInt(2,MemberMenu.memberNum); 
 			int result = pstmt3.executeUpdate();
+			conn.commit();
 			if(result == 1) {
 				System.out.println("--------------------------------");
 				System.out.println("남은 시간은 " + rtime + "분 입니다.");
@@ -127,8 +130,8 @@ public class StopUse {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,ServiceManager.seatNum);
-			int result = pstmt.executeUpdate();
-			
+			pstmt.executeUpdate();
+			conn.commit();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
