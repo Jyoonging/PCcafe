@@ -11,36 +11,32 @@ public class OrderProduct {
 		
 		PurchaseProduct pp = new PurchaseProduct();
 		
-//상품 보여주기
+		//상품 보여주기
 		try {
 			pp.showProduct();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("올바른 값이 아닙니다.");
 		}
 		
 		//주문 번호 생성
 		try {
 			pp.createOrder();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("올바른 값이 아닙니다.");
 		}
 
 		//장바구니(주문내역)
 		try {
 			pp.addCart();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("올바른 값이 아닙니다.");
 		}
 		
 		//추가 구매
 		try {
 			pp.addPurchase();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("올바른 값이 아닙니다.");
 		}
 		
 		//결제
@@ -50,11 +46,9 @@ public class OrderProduct {
 		try {
 			pp.finishPay();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("올바른 값이 아닙니다.");
 		}
 		System.out.println("상품을 준비하는 중입니다......");
-		
 		
 		
 		}
