@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import pcCafe.main.JdbcTemplate;
 import pcCafe.product.PurchaseProduct;
+import pcCafe.useStatus.SeatServiceManager;
 
 public class OrderProduct {
 	
@@ -58,6 +59,8 @@ public class OrderProduct {
 			e.printStackTrace();
 		}
 		System.out.println("상품을 준비하는 중입니다......");
+		SeatServiceManager ssm = new SeatServiceManager();
+		ssm.afterChooseSeat();
 		
 		
 		
