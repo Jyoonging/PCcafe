@@ -61,7 +61,7 @@ package pcCafe.main;
 
 	            //sql문 select문 실행 !
 	            Connection conn = JdbcTemplate.getConnection();
-	            PreparedStatement pstmt = conn.prepareStatement("SELECT MEM_NUM, MEM_ID,MEM_PWD,MEM_NAME FROM MEMBER WHERE MEM_ID=? AND MEM_PWD =?");
+	            PreparedStatement pstmt = conn.prepareStatement("SELECT MEM_NUM, MEM_ID,MEM_PWD,MEM_NAME FROM MEMBER WHERE MEM_ID=? AND MEM_PWD =? AND QUIT_YN = 'N'");
 	            pstmt.setString(1, md.getUserId());
 	            pstmt.setString(2, md.getUserPwd());
 	            ResultSet rs = pstmt.executeQuery();
@@ -78,9 +78,9 @@ package pcCafe.main;
 	            	return 0;
 	            }
 	        }catch(SQLException e){
-	            e.printStackTrace();;
 	            JdbcTemplate.rollback(JdbcTemplate.getConnection());
 	            view.showError("로그인 실패");
+	            System.out.println("없는 정보입니다.");
 	            }
 			return 0;
 	        
