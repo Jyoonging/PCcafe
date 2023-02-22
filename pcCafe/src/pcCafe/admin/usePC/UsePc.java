@@ -33,9 +33,9 @@ public class UsePc {
 				}
 				System.out.println("===================  선택 항목  ======================");
 				System.out.println("                                                                 "); 
-				System.out.println("    ┌──────────────┐  ┌─────────────┐                             ");
-				System.out.println("    │   1. 계속 찾기  │  │   2. 뒤로가기  │                            ");
-				System.out.println("    └──────────────┘  └─────────────┘                             ");
+				System.out.println("    ┌──────────────┐  ┌───────────────┐                             ");
+				System.out.println("    │   1. 계속 찾기  │  │   2. 뒤로 가기   │                            ");
+				System.out.println("    └──────────────┘  └───────────────┘                             ");
 				System.out.println("===================================================");
 				System.out.print("  : " );
 				String c = AdminMain.SC.nextLine().trim();

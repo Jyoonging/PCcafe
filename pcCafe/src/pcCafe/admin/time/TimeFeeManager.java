@@ -37,7 +37,7 @@ public class TimeFeeManager {
 				System.out.println("==========================  시간권 메뉴  ==================================");
 				System.out.println("                                                                                       "); 
 				System.out.println("    ┌─────────────┐  ┌─────────────┐  ┌───────────────┐                                           ");
-				System.out.println("    │   1. 수정    │  │    2. 추가    │  │   3. 가격 변경  │                                           ");
+				System.out.println("    │   1. 수정    │  │    2. 추가    │  │   9. 뒤로 가기   │                                           ");
 				System.out.println("    └─────────────┘  └─────────────┘  └───────────────┘                                           ");
 				System.out.print(":  "   );
 				String select = Main.SC.nextLine().trim();
