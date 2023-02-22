@@ -4,7 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
 
+import adminPrj.admin.time.TimeData;
 import pcCafe.main.JdbcTemplate;
+import pcCafe.main.Main;
 import pcCafe.useStatus.ServiceManager;
 
 public class PurchaseProduct {
@@ -41,7 +43,7 @@ public class PurchaseProduct {
 		String sql1 = "INSERT INTO PRODUCT_PAYMENT(PP_NUM, USE_NUM) VALUES(PP_NUM_SEQ.NEXTVAL,?)";
 		
 		PreparedStatement pstmt1 = conn.prepareStatement(sql1);
-		pstmt1.setInt(1, ServiceManager.useNum); //!!!!!!!!!!깡분님 이용번호 받아서 수정!!!!!!!!!!
+		pstmt1.setInt(1, ServiceManager.useNum);
 		pstmt1.executeUpdate();
 		conn.commit();
 
@@ -175,22 +177,54 @@ public class PurchaseProduct {
 	}
 	
 	//결제
-	public void payProduct() {
+	public void payProduct() throws Exception {
 		boolean notPay = true;
 		while(notPay) {
-			System.out.println("=====결제=====");
+			System.out.println("\n=====결제=====");
 			System.out.println("1.카드 2.현금");
 			System.out.print("결제방법을 선택해주세요 :");
 			String payMethod = SC.nextLine();
-			if(payMethod.equals("1") || payMethod.equals("2")) {
-				System.out.println("결제 완료. 감사합니다.");
+			if(payMethod.equals("1")) {
+				System.out.println("\n결제 완료. 감사합니다.");
 				break;
-			}else {
-				System.out.println("잘못 누르셨습니다.");
+			}else if(payMethod.equals("2")) {
+				int change = payCash();
+				System.out.println("\n결제 완료. 감사합니다.");
+				System.out.println("거스름돈 : "+ change +"원");
+				break;
+			}
+			else {
+				System.out.println("\n잘못 누르셨습니다.");
 				continue;
 			}
 		}
 	}
+	
+	//현금결제
+	public int payCash() throws Exception {
+		//현금받기
+		int cash = 0;
+		//총 금액
+		int totalPrice = showTotal();
+		while(true) {
+			try {
+				System.out.print("\n지불하실 금액을 입력해주세요 :");
+				String payCash = Main.SC.nextLine();
+				cash = Integer.parseInt(payCash);
+				if(cash < totalPrice) {
+					System.out.println("\n금액이 무족합니다. 다시 입력해주세요.");
+					continue;
+				}
+				break;
+			}catch (Exception e) {
+				System.out.println("\n정상적인 숫자를 입력해주세요.");
+			}
+		}
+		//거스름돈
+		int change = cash - totalPrice;
+		return change;
+	}
+	
 	
 	//결제 종료 - 가격. 결제시간 인서트
 	public void finishPay() throws Exception {
@@ -209,6 +243,8 @@ public class PurchaseProduct {
 		PreparedStatement pstmt9 = conn.prepareStatement(sql9);
 		pstmt9.executeUpdate();
 		conn.commit();
+		
+		System.out.println("\n상품을 준비하는 중입니다......");
 	}
 
 	

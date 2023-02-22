@@ -40,7 +40,11 @@ public class OrderProduct {
 		}
 		
 		//결제
-		pp.payProduct();
+		try {
+			pp.payProduct();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		
 		//결제종료
 		try {
@@ -48,9 +52,7 @@ public class OrderProduct {
 		} catch (Exception e) {
 			System.out.println("올바른 값이 아닙니다.");
 		}
-		System.out.println("상품을 준비하는 중입니다......");
 		
-		
-		}
+	}
 
 }
