@@ -2,9 +2,17 @@ package pcCafe.main;
 
 public class MemberData {
 
-		private static final int MINIMUM_ID_LENGTH = 5;
-		private static final int MAXIMUM_ID_LENGTH = 12;
-		private static final int MINIMUM_PASSWORD_LENGTH = 4;
+		private static final int MINIMUM_ID_LENGTH = 4;
+
+		private static final int MINIMUM_PWD_LENGTH = 4;
+		private static final int MAXIMUM_PWD_LENGTH = 12;
+
+		private  static final int BIRTHDAY_LENGTH = 6;
+
+		private  static final int PHONE_LENGTH = 11;
+
+
+
 
 	    public int getUserNum() {
 	        return userNum;
@@ -19,8 +27,8 @@ public class MemberData {
 	    }
 
 	    public void setUserId(String userId) {
-			if((userId.length() <= MINIMUM_ID_LENGTH) || (userId.length() > MAXIMUM_ID_LENGTH)){
-				System.out.println("아이디 입력조건을 다시 확인하세요 ");
+			if(!isValidUserId(userId)){
+				System.out.println("아이디 입력조건을 다시 확인해주세요");
 				return;
 			}
 	        this.userId = userId;
@@ -31,9 +39,8 @@ public class MemberData {
 	    }
 
 	public void setUserPwd(String userPwd) {
-		String pwdPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,16}$";
-		if (!userPwd.matches(pwdPattern)) {
-			System.out.println("비밀번호 입력조건을 다시 확인하세요");
+		if(!isValidUserPwd(userPwd)){
+			System.out.println("비밀번호 입력조건을 다시 확인해주세요");
 			return;
 		}
 		this.userPwd = userPwd;
@@ -49,10 +56,15 @@ public class MemberData {
 	    }
 
 	    public String getUserBirth() {
+
 	        return userBirth;
 	    }
 
 	    public void setUserBirth(String userBirth) {
+			if(!isValidUserBirth(userBirth)){
+				System.out.println("생년월일 입력 조건을 다시확인해주세요");
+				return;
+			}
 	        this.userBirth = userBirth;
 	    }
 
@@ -61,6 +73,9 @@ public class MemberData {
 	    }
 
 	    public void setUserPhone(String userPhone) {
+			if(!isValidUserPhone(userPhone)){
+				System.out.println("핸드폰번호 입력조건을 다시 확인해주세요");
+			}
 	        this.userPhone = userPhone;
 	    }
 
@@ -88,8 +103,7 @@ public class MemberData {
 	        setUserId(userId);
 	        setUserPwd(userPwd);
 	        this.userName = userName;
-	        this.userBirth = userBirth;
-	        this.userPhone = userPhone;
+	        setUserBirth(userBirth);
 	        this.quit_yn = quit_yn;
 	        this.memTime = memTime;
 	    }
@@ -125,6 +139,23 @@ public class MemberData {
 	    private String quit_yn;
 
 	    private int memTime;
+
+
+	public boolean isValidUserId(String userId) {
+		return userId != null && userId.length() > MINIMUM_ID_LENGTH;
+	}
+
+	public boolean isValidUserPwd(String userPwd) {
+		return userPwd != null && userPwd.length() >= MINIMUM_PWD_LENGTH && userPwd.length() <= MAXIMUM_PWD_LENGTH;
+	}
+
+	public boolean isValidUserBirth(String userBirth) {
+		return userBirth != null && userBirth.length() == BIRTHDAY_LENGTH;
+	}
+
+	public boolean isValidUserPhone(String userPhone) {
+		return userPhone != null && userPhone.length() <= PHONE_LENGTH;
+	}
 
 
 	}

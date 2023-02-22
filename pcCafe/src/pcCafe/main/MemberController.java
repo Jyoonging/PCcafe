@@ -8,18 +8,47 @@ package pcCafe.main;
 
 	public class MemberController {
 
+
 	    private MemberView view = new MemberView();
 	    private MemberData md = new MemberData();
 
 	    public void join() {
-	        try {
-	            //유저 데이터 입력받기
-	            String userId = view.getInput("아이디 (5자리 이상 12자리 이하)");
-	            String userPwd = view.getInput("비밀번호 (4~16자 영문, 숫자, 특수문자를 사용하세요.)");
-	            String userName = view.getInput("이름");
-	            String userBirthday = view.getInput("생년월일 (6자리)");
-	            String userPhone = view.getInput("전화번호 (11자리 이하)");
+			String userId = "";
+			String userPwd = "";
+			String userName = "";
+			String userBirthday = "";
+			String userPhone = "";
 
+			while(true){
+
+				userId = view.getInput("ID(5자리 이상");
+				if(md.isValidUserId(userId)){
+					break;
+				}
+			}
+
+			while(true){
+				userPwd = view.getInput("비밀번호(4~12자리)");
+				if(md.isValidUserPwd(userPwd)){
+					break;
+				}
+			}
+
+			userName = view.getInput("이름");
+
+			while(true){
+				userBirthday = view.getInput("생년월일(6자리)");
+				if(md.isValidUserBirth(userBirthday)){
+					break;
+				}
+			}
+
+			while(true){
+				userPhone = view.getInput("전화번호 (11자리 이하)");
+				if(md.isValidUserPhone(userPhone)){
+					break;
+				}
+			}
 	            md.setUserId(userId);
 	            md.setUserPwd(userPwd);
 	            md.setUserName(userName);
@@ -27,7 +56,7 @@ package pcCafe.main;
 	            md.setUserPhone(userPhone);
 
 
-	            //회원가입 인서트 sql문 실행
+	           try{ //회원가입 인서트 sql문 실행
 	            Connection conn = JdbcTemplate.getConnection();
 	            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO MEMBER(MEM_NUM,MEM_ID,MEM_PWD,MEM_NAME,MEM_BIRTH,MEM_PHONE) VALUES (seq_member_no.nextval,?,?,?,?,?)");
 	            pstmt.setString(1, md.getUserId());
@@ -44,9 +73,8 @@ package pcCafe.main;
 
 	            view.showMessage("회원가입 성공.");
 	        } catch (SQLException e) {
-	            e.printStackTrace();
 	            JdbcTemplate.rollback(JdbcTemplate.getConnection());
-	            view.showError("회원가입 실패");
+				System.out.println("회원가입 실패");
 	        }
 	    }
 
@@ -79,7 +107,7 @@ package pcCafe.main;
 	            }
 	        }catch(SQLException e){
 	            JdbcTemplate.rollback(JdbcTemplate.getConnection());
-	            view.showError("로그인 실패");
+				System.out.println("로그인 실패");
 	            System.out.println("없는 정보입니다.");
 	            }
 			return 0;
