@@ -118,8 +118,10 @@ public class StopUse {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,ServiceManager.seatNum);
-			pstmt.executeUpdate();
+			int result = pstmt.executeUpdate();
+			System.out.println(result);
 			conn.commit();
+			conn.close();
 		} catch (SQLException e) {
 			System.out.println("올바른 값이 아닙니다.");
 		}
