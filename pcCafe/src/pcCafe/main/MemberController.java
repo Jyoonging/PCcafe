@@ -21,7 +21,7 @@ package pcCafe.main;
 
 			while(true){
 
-				userId = view.getInput("ID(5자리 이상");
+				userId = view.getInput("ID(5자리 이상)");
 				if(md.isValidUserId(userId)){
 					break;
 				}
@@ -34,7 +34,13 @@ package pcCafe.main;
 				}
 			}
 
-			userName = view.getInput("이름");
+			while(true){
+				userName = view.getInput("이름");
+				if(md.isValidUserName(userName)){
+					break;
+				}
+			}
+
 
 			while(true){
 				userBirthday = view.getInput("생년월일(6자리)");

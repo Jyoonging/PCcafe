@@ -1,5 +1,9 @@
 package pcCafe.main;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 public class MemberData {
 
 		private static final int MINIMUM_ID_LENGTH = 4;
@@ -52,6 +56,10 @@ public class MemberData {
 	    }
 
 	    public void setUserName(String userName) {
+			if(userName == null || userName.contains(" ")){
+				System.out.println("이름을 입력해주세요");
+				return;
+			}
 	        this.userName = userName;
 	    }
 
@@ -142,23 +150,45 @@ public class MemberData {
 
 
 	public boolean isValidUserId(String userId) {
-		return userId != null && userId.length() > MINIMUM_ID_LENGTH;
-	}
+		if (userId == null || userId.length() <= MINIMUM_ID_LENGTH){
+			return false;
+		}
+
+		try (
+			Connection conn = JdbcTemplate.getConnection();
+			 PreparedStatement pstmt = conn.prepareStatement("SELECT COUNT(*) FROM MEMBER WHERE MEM_ID=?")){
+				pstmt.setString(1, userId);
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				int count = rs.getInt(1);
+				if (count > 0) {
+					System.out.println("이 아이디는 이미 존재합니다");
+					return false;
+				}
+			}catch (Exception e){
+				System.out.println("바보");
+			}
+
+			return true;
+		}
+
 
 	public boolean isValidUserPwd(String userPwd) {
 		return userPwd != null && userPwd.length() >= MINIMUM_PWD_LENGTH && userPwd.length() <= MAXIMUM_PWD_LENGTH;
 	}
 
 	public boolean isValidUserBirth(String userBirth) {
-		return userBirth != null && userBirth.length() == BIRTHDAY_LENGTH;
+		return userBirth != null && userBirth.matches("[0-9]+") && userBirth.length() == BIRTHDAY_LENGTH;
 	}
 
 	public boolean isValidUserPhone(String userPhone) {
-		return userPhone != null && userPhone.length() <= PHONE_LENGTH;
+		return userPhone != null && userPhone.matches("[0-9]+") && userPhone.length() <= PHONE_LENGTH;
 	}
 
-
+	public boolean isValidUserName(String userName){
+		return userName != null && userName.trim().length() > 0 && !userName.contains(" ");
 	}
 
+	}
 
 
