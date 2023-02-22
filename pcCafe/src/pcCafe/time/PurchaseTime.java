@@ -59,7 +59,7 @@ public final class PurchaseTime {
 			String feeInput = Main.SC.nextLine().trim();
 			if(feeInput.equals("0")) {
 				System.out.println("로그인 후 선택화면으로 돌아가기");
-				return 1;
+				return 0;
 			}else {
 			
 				int inputNum = Integer.parseInt(feeInput);
