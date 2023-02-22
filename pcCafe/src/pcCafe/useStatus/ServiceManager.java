@@ -193,7 +193,7 @@ public class ServiceManager {
 	        ResultSet rs3 = pstmt5.executeQuery();
 	        rs3.next();
 	        String brokenYN = rs3.getString("BROKEN_YN");
-	        int seatNum = rs3.getInt("SEAT_NUM");
+	        seatNum = rs3.getInt("SEAT_NUM");
 	        if(input == seatNum) {
 	        	System.out.println("사용 불가능한 좌석입니다. 다시 선택해주세요.");
 	        	return 0;
