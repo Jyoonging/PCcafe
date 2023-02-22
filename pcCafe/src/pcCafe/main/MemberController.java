@@ -14,11 +14,11 @@ package pcCafe.main;
 	    public void join() {
 	        try {
 	            //유저 데이터 입력받기
-	            String userId = view.getInput("아이디");
-	            String userPwd = view.getInput("비밀번호");
+	            String userId = view.getInput("아이디 (5자리 이상 12자리 이하)");
+	            String userPwd = view.getInput("비밀번호 (4~16자 영문, 숫자, 특수문자를 사용하세요.)");
 	            String userName = view.getInput("이름");
-	            String userBirthday = view.getInput("생년월일");
-	            String userPhone = view.getInput("전화번호");
+	            String userBirthday = view.getInput("생년월일 (6자리)");
+	            String userPhone = view.getInput("전화번호 (11자리 이하)");
 
 	            md.setUserId(userId);
 	            md.setUserPwd(userPwd);
