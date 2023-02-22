@@ -3,6 +3,7 @@ package pcCafe.main;
 public class MemberData {
 
 		private static final int MINIMUM_ID_LENGTH = 5;
+		private static final int MAXIMUM_ID_LENGTH = 12;
 		private static final int MINIMUM_PASSWORD_LENGTH = 4;
 
 	    public int getUserNum() {
@@ -18,8 +19,8 @@ public class MemberData {
 	    }
 
 	    public void setUserId(String userId) {
-			if(userId.length() < MINIMUM_ID_LENGTH){
-				System.out.println("아이디는 5자리보다 커야함 ");
+			if((userId.length() <= MINIMUM_ID_LENGTH) || (userId.length() > MAXIMUM_ID_LENGTH)){
+				System.out.println("아이디 입력조건을 다시 확인하세요 ");
 				return;
 			}
 	        this.userId = userId;
@@ -29,15 +30,17 @@ public class MemberData {
 	        return userPwd;
 	    }
 
-	    public void setUserPwd(String userPwd) {
-			if(userPwd.length() < MINIMUM_PASSWORD_LENGTH){
-				System.out.println("비밀번호는 4자리보다 커야함 ");
-				return;
-			}
-	        this.userPwd = userPwd;
-	    }
+	public void setUserPwd(String userPwd) {
+		String pwdPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,16}$";
+		if (!userPwd.matches(pwdPattern)) {
+			System.out.println("비밀번호 입력조건을 다시 확인하세요");
+			return;
+		}
+		this.userPwd = userPwd;
+	}
 
-	    public String getUserName() {
+
+	public String getUserName() {
 	        return userName;
 	    }
 
