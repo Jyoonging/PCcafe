@@ -136,15 +136,12 @@ public class ServiceManager {
 		            
 		            System.out.print(seatNum + "번" + " ◻︎ ");
 		            System.out.print(" || ");
-
 		            if (SEAT_TYPE.equals("금연")) {
 		                System.out.print(" 금연 좌석 ");
 		            } else {
 		                System.out.print(" 흡연 좌석 ");
 		            }
-
 		            System.out.print(" || ");
-
 		            if (USAGE_YN.equals("Y")) {
 		                System.out.println("사용 중 ... ");
 		            } else {
@@ -172,18 +169,19 @@ public class ServiceManager {
 		        // conn 정리
 		        conn.close();
 		    } catch (Exception e) {
-		    	System.err.println("Error: " + e.getMessage());
+		    	System.out.println("올바른 값이 아닙니다.");
 		    }
 		}
 
 		//좌석 사용여부
 		public int usage_YN() {
-		    
 
 			String inputNum = Main.SC.nextLine().trim();
 			int input = Integer.parseInt(inputNum);
 			// 저장된 좌석 번호로 사용 여부 조회
 		    String sql1 = "SELECT SEAT_NUM, USAGE_YN FROM SEAT WHERE SEAT_NUM = ?";
+		    // 고장난 좌석 선택 불가하게 
+		    String sql5 = "SELECT SEAT_NUM, BROKEN_YN FROM SEAT WHERE BROKEN_YN = 'Y'";
 		    // 좌석 선택과 동시에 이용내역 INSERT
 		    String sql2 = "INSERT INTO PC_USE(USE_NUM,SEAT_NUM,MEM_NUM, PC_STARTTIME) VALUES(PC_USE_SEQ.NEXTVAL,?,?,SYSDATE)";
 		    // 좌석 선택 성공 시 멤버테이블 사용 여부 업데이트
@@ -193,9 +191,22 @@ public class ServiceManager {
 		    Connection conn;
 		    try {
 		        conn = JdbcTemplate.getConnection();
+		        // 고장좌석 선택 시 불가하게 만들기
+		        PreparedStatement pstmt5 = conn.prepareStatement(sql5);
+		        ResultSet rs3 = pstmt5.executeQuery();
+		        rs3.next();
+		        String brokenYN = rs3.getString("BROKEN_YN");
+		        int seatNum = rs3.getInt("SEAT_NUM");
+		        if(input == seatNum) {
+		        	System.out.println("사용 불가능한 좌석입니다. 다시 선택해주세요.");
+		        	return 0;
+		        }
+		        
+		        
 		        PreparedStatement pstmt1 = conn.prepareStatement(sql1);
 		        pstmt1.setInt(1, input);
 		        ResultSet rs1 = pstmt1.executeQuery();
+		        
 		        // 결과 꺼내서 사용 여부 알려주기
 		        rs1.next();
 		            String USAGE_YN = rs1.getString("USAGE_YN");
@@ -234,16 +245,10 @@ public class ServiceManager {
 		        			    }
 		            }
 		            
-	            //SQL4에서 USE_NUM 가져오기
-		       
-		            
-		            
 		          
-		        // conn 정리
-		        
 		    } catch (Exception e) {
 		    	
-		    	System.err.println("Error: " + e.getMessage());
+		    	System.out.println("올바른 값이 아닙니다.");
 		    	return 0;
 		    }
 		}
