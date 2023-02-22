@@ -58,7 +58,7 @@ public final class PurchaseTime {
 			System.out.print("요금제를 선택하세요.:");
 			String feeInput = Main.SC.nextLine().trim();
 			if(feeInput.equals("0")) {
-				System.out.println("로그인 후 선택화면으로 돌아가기");
+				System.out.println("이전 화면으로 돌아갑니다.");
 				return 0;
 			}else {
 			
