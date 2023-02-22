@@ -171,11 +171,12 @@ public class AdditonalPayment {
 		
 		//SQL문작성 : 결제내역 인서트 
 		//feeNum은 static 멤버변수로 선언하여 어디서든 이용가능하게끔 
-		String sql= "INSERT INTO TIME_PAYMENT VALUES (TP_NUM.NEXTVAL,?,SYSDATE,?)";
+		String sql= "INSERT INTO TIME_PAYMENT VALUES (TP_NUM.NEXTVAL,?,SYSDATE,?,?)";
 		PreparedStatement pstmt = conn.prepareStatement(sql); 
 		
 		pstmt.setInt(1, data.getFeeNum()); 
 		pstmt.setInt(2, MemberMenu.memberNum); 
+		pstmt.setInt(3, data.getTimePrice());
 		
 		int result = pstmt.executeUpdate();
 		conn.commit();
