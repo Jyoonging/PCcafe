@@ -10,7 +10,6 @@ public class ProductMain {
 		
 		JdbcTemplate j = new JdbcTemplate();
 		Connection conn = j.getConnection();
-		Scanner sc = new Scanner(System.in);
 		PurchaseProduct pp = new PurchaseProduct();
 		
 		System.out.println("=====상품주문=====");
@@ -20,7 +19,6 @@ public class ProductMain {
 			pp.showProduct();
 			conn.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -29,7 +27,6 @@ public class ProductMain {
 			pp.createOrder();
 			conn.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -38,7 +35,6 @@ public class ProductMain {
 			pp.addCart();
 			conn.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -47,26 +43,23 @@ public class ProductMain {
 			pp.addPurchase();
 			conn.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		//결제
-		pp.payProduct();
+		try {
+			pp.payProduct();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		
 		//결제종료
 		try {
 			pp.finishPay();
 			conn.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("상품을 준비하는 중입니다......");
-		
-		//자원 정리
-		
-		System.out.println("프로그램 종료");
 		
 	}
 	
