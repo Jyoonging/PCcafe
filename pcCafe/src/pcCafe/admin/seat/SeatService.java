@@ -18,7 +18,7 @@ public class SeatService {
 		System.out.println("좌석보기");
 		try {
 			
-			String sql = "select SEAT_NUM, BROKEN_YN, MONITOR_TYPE, SEAT_TYPE, USAGE_YN FROM SEAT ORDER BY SEAT_NUM ";
+			String sql = "SELECT SEAT_NUM, BROKEN_YN, MONITOR_TYPE, SEAT_TYPE, USAGE_YN FROM SEAT ORDER BY SEAT_NUM ";
 			Connection conn = JdbcTemplate.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();

@@ -15,12 +15,11 @@ public class StockService {
 	public void showProduct(){
 		try {
 			
-			String sql = "SELECT P_NAME,P_QTY,P_PRICE FROM PRODUCT_LIST";
+			String sql = "SELECT P_NAME,P_QTY,P_PRICE FROM PRODUCT_LIST ORDER BY P_NUM";
 			Connection conn = JdbcTemplate.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			
-			//결과집합에서 데이터 꺼내기 
 			System.out.println("==================================");
 			System.out.println("=============상 품 목 록============");
 			System.out.println("|| 상품 이름  상품 재고 수량  상품 가격||");
@@ -47,6 +46,7 @@ public class StockService {
 	}
 	
 	public void volume() {
+		StockLog sl = new StockLog();
 		try {
 			ProductData pd =  SI.volume();
 			Connection conn = JdbcTemplate.getConnection();
@@ -56,10 +56,36 @@ public class StockService {
 			pstmt.setString(2, pd.getpName());
 			int result = pstmt.executeUpdate();
 			if(result == 1) {
-				StockLog.log(pd.getpQty());//로그저장
+
+				try {
+					String sql2 = "SELECT P_NUM FROM PRODUCT_LIST WHERE P_NAME = ?";
+					PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+					pstmt2.setString(1, pd.getpName());
+					ResultSet rs = pstmt2.executeQuery();
+					rs.next();
+					String num= rs.getString("P_NUM");
+					String sql3 = "INSERT INTO STOCK_MANAGEMENT(STOCK_NUM,STOCK_DATE,ADMIN_NUM,STOCK_QTY,P_NUM) VALUES(STOCK_MANAGEMENT_SEQ.NEXTVAL,SYSDATE,?,?,?)";
+					PreparedStatement pstmt3 = conn.prepareStatement(sql3);
+					pstmt3.setInt(1, AdminMain.adminNum);
+					pstmt3.setInt(2, pd.getpQty());
+					pstmt3.setString(3, num);
+					int result2 = pstmt3.executeUpdate();
+					
+					if(result2 == 1) {
+						System.out.println("처리 성공~");
+					}else {
+						System.out.println("처리 실패...");
+					}
+					
+					conn.close();
+					
+				} catch (Exception e) {
+					AdminMain.Exception();
+				}
 			}else {
 				System.out.println("상품 이름을 확인하세요");
 			}
+			
 			conn.close();
 		}catch(Exception e) {
 			AdminMain.Exception();
@@ -91,6 +117,7 @@ public class StockService {
 	}
 	
 	public void add() {
+		StockLog sl = new StockLog();
 		try {
 			ProductData pd = SI.add();
 			Connection conn = JdbcTemplate.getConnection();
@@ -100,11 +127,32 @@ public class StockService {
 			pstmt.setInt(2, pd.getpPrice());
 			pstmt.setInt(3, pd.getpQty());
 			int result = pstmt.executeUpdate();
-			//결과에 따른 처리
 			if(result == 1) {
-				System.out.println("추가 성공!");
-				StockLog.log(pd.getpQty());
-
+				try {
+					String sql2 = "SELECT P_NUM FROM PRODUCT_LIST WHERE P_NAME = ?";
+					PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+					pstmt2.setString(1, pd.getpName());
+					ResultSet rs = pstmt2.executeQuery();
+					rs.next();
+					String num= rs.getString("P_NUM");
+					String sql3 = "INSERT INTO STOCK_MANAGEMENT(STOCK_NUM,STOCK_DATE,ADMIN_NUM,STOCK_QTY,P_NUM) VALUES(STOCK_MANAGEMENT_SEQ.NEXTVAL,SYSDATE,?,?,?)";
+					PreparedStatement pstmt3 = conn.prepareStatement(sql3);
+					pstmt3.setInt(1, AdminMain.adminNum);
+					pstmt3.setInt(2, pd.getpQty());
+					pstmt3.setString(3, num);
+					int result2 = pstmt3.executeUpdate();
+					
+					if(result2 == 1) {
+						System.out.println("처리 성공~");
+					}else {
+						System.out.println("처리 실패...");
+					}
+					
+					conn.close();
+					
+				} catch (Exception e) {
+					AdminMain.Exception();
+				}
 			}else {
 				System.out.println("작성하신 정보를 확인하세요");
 			}
