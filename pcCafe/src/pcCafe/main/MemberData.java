@@ -8,189 +8,213 @@ import java.util.List;
 
 public class MemberData {
 
-		private static final int MINIMUM_ID_LENGTH = 4;
+	private static final int MINIMUM_ID_LENGTH = 4;
 
-		private static final int MINIMUM_PWD_LENGTH = 4;
-		private static final int MAXIMUM_PWD_LENGTH = 12;
+	private static final int MINIMUM_PWD_LENGTH = 4;
+	private static final int MAXIMUM_PWD_LENGTH = 12;
 
-		private  static final int BIRTHDAY_LENGTH = 6;
+	private static final int BIRTHDAY_LENGTH = 6;
 
-		private  static final int PHONE_LENGTH = 11;
-
-
+	private static final int PHONE_LENGTH = 11;
 
 
-	    public int getUserNum() {
-	        return userNum;
-	    }
+	public int getUserNum() {
+		return userNum;
+	}
 
-	    public void setUserNum(int userNum) {
-	        this.userNum = userNum;
-	    }
+	public void setUserNum(int userNum) {
+		this.userNum = userNum;
+	}
 
-	    public String getUserId() {
-	        return userId;
-	    }
+	public String getUserId() {
+		return userId;
+	}
 
-	    public void setUserId(String userId) {
-	        this.userId = userId;
-	    }
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
-	    public String getUserPwd() {
-	        return userPwd;
-	    }
+	public String getUserPwd() {
+		return userPwd;
+	}
 
 	public void setUserPwd(String userPwd) {
-		if(!isValidUserPwd(userPwd)){
-			System.out.println("비밀번호 입력조건을 다시 확인해주세요");
-			return;
-		}
 		this.userPwd = userPwd;
 	}
 
-
 	public String getUserName() {
-	        return userName;
-	    }
+		return userName;
+	}
 
-	    public void setUserName(String userName) {
-			if(userName == null || userName.contains(" ")){
-				System.out.println("이름을 입력해주세요");
-				return;
-			}
-	        this.userName = userName;
-	    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-	    public String getUserBirth() {
+	public String getUserBirth() {
 
-	        return userBirth;
-	    }
+		return userBirth;
+	}
 
-	    public void setUserBirth(String userBirth) {
-			if(!isValidUserBirth(userBirth)){
-				System.out.println("생년월일 입력 조건을 다시확인해주세요");
-				return;
-			}
-	        this.userBirth = userBirth;
-	    }
+	public void setUserBirth(String userBirth) {
+		this.userBirth = userBirth;
+	}
 
-	    public String getUserPhone() {
-	        return userPhone;
-	    }
+	public String getUserPhone() {
+		return userPhone;
+	}
 
-	    public void setUserPhone(String userPhone) {
-			if(!isValidUserPhone(userPhone)){
-				System.out.println("핸드폰번호 입력조건을 다시 확인해주세요");
-			}
-	        this.userPhone = userPhone;
-	    }
+	public void setUserPhone(String userPhone) {
+		if (!isValidUserPhone(userPhone)) {
+			System.out.println("핸드폰번호 입력조건을 다시 확인해주세요");
+		}
+		this.userPhone = userPhone;
+	}
 
-	    public String getQuit_yn() {
-	        return quit_yn;
-	    }
+	public String getQuit_yn() {
+		return quit_yn;
+	}
 
-	    public void setQuit_yn(String quit_yn) {
-	        this.quit_yn = quit_yn;
-	    }
+	public void setQuit_yn(String quit_yn) {
+		this.quit_yn = quit_yn;
+	}
 
-	    public int getMemTime() {
-	        return memTime;
-	    }
+	public int getMemTime() {
+		return memTime;
+	}
 
-	    public void setMemTime(int memTime) {
-	        this.memTime = memTime;
-	    }
+	public void setMemTime(int memTime) {
+		this.memTime = memTime;
+	}
 
-	    public MemberData() {
-	    }
+	public MemberData() {
+	}
 
-	    public MemberData(int userNum, String userId, String userPwd, String userName, String userBirth, String userPhone, String quit_yn, int memTime) {
-	        this.userNum = userNum;
-	        this.userId = userId;
-	        this.userPwd = userPwd;
-	        this.userName = userName;
-	        this.userPhone = userPhone;
-	        this.quit_yn = quit_yn;
-	        this.memTime = memTime;
-	    }
+	public MemberData(int userNum, String userId, String userPwd, String userName, String userBirth, String userPhone, String quit_yn, int memTime) {
+		this.userNum = userNum;
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.userPhone = userPhone;
+		this.quit_yn = quit_yn;
+		this.memTime = memTime;
+	}
 
-	    public MemberData(String userId, String userPwd, String userName, String userBirth, String userPhone) {
-	        this.userId = userId;
-	        this.userPwd = userPwd;
-	        this.userName = userName;
-	        this.userBirth = userBirth;
-	        this.userPhone = userPhone;
-	    }
+	public MemberData(String userId, String userPwd, String userName, String userBirth, String userPhone) {
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.userBirth = userBirth;
+		this.userPhone = userPhone;
+	}
 
-	    @Override
-	    public String toString() {
-	        return "MemberModel{" +
-	                "userNum=" + userNum +
-	                ", userId='" + userId + '\'' +
-	                ", userPwd='" + userPwd + '\'' +
-	                ", userName='" + userName + '\'' +
-	                ", userBirth='" + userBirth + '\'' +
-	                ", userPhone='" + userPhone + '\'' +
-	                ", quit_yn='" + quit_yn + '\'' +
-	                ", memTime=" + memTime +
-	                '}';
-	    }
+	@Override
+	public String toString() {
+		return "MemberModel{" +
+				"userNum=" + userNum +
+				", userId='" + userId + '\'' +
+				", userPwd='" + userPwd + '\'' +
+				", userName='" + userName + '\'' +
+				", userBirth='" + userBirth + '\'' +
+				", userPhone='" + userPhone + '\'' +
+				", quit_yn='" + quit_yn + '\'' +
+				", memTime=" + memTime +
+				'}';
+	}
 
-	    private int userNum;
-	    private String userId;
-	    private String userPwd;
-	    private String userName;
-	    private String userBirth;
-	    private String userPhone;
-	    private String quit_yn;
+	private int userNum;
+	private String userId;
+	private String userPwd;
+	private String userName;
+	private String userBirth;
+	private String userPhone;
+	private String quit_yn;
 
-	    private int memTime;
+	private int memTime;
 
 
 	public String isValidUserId(String userId) {
 		List<String> errorMessages = new ArrayList<>();
-		if (userId == null || userId.length() <= MINIMUM_ID_LENGTH){
-			errorMessages.add("id는 " + (MINIMUM_ID_LENGTH+1) +"보다 커야함");
+		if (userId == null || userId.length() <= MINIMUM_ID_LENGTH) {
+			errorMessages.add("아이디 입력조건을 확인해주세요");
 		}
 
 		try (
-			Connection conn = JdbcTemplate.getConnection();
-			 PreparedStatement pstmt = conn.prepareStatement("SELECT COUNT(*) FROM MEMBER WHERE MEM_ID=?")){
-				pstmt.setString(1, userId);
-				ResultSet rs = pstmt.executeQuery();
-				rs.next();
-				int count = rs.getInt(1);
-				if (count > 0) {
-					errorMessages.add("이 아이디는 이미 존재합니다.");
-				}
-			}catch (Exception e){
-				System.out.println("바보");
+				Connection conn = JdbcTemplate.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement("SELECT COUNT(*) FROM MEMBER WHERE MEM_ID=?")) {
+			pstmt.setString(1, userId);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+			if (count > 0) {
+				errorMessages.add("이 아이디는 이미 존재합니다.");
 			}
-
-			if(errorMessages.isEmpty()){
-				return null;
-			} else {
-				return String.join(" and ", errorMessages);
-			}
+		} catch (Exception e) {
+			System.out.println("바보");
 		}
 
-
-	public boolean isValidUserPwd(String userPwd) {
-		return userPwd != null && userPwd.length() >= MINIMUM_PWD_LENGTH && userPwd.length() <= MAXIMUM_PWD_LENGTH;
+		if (errorMessages.isEmpty()) {
+			return null;
+		} else {
+			return String.join(" and ", errorMessages);
+		}
 	}
 
-	public boolean isValidUserBirth(String userBirth) {
-		return userBirth != null && userBirth.matches("[0-9]+") && userBirth.length() == BIRTHDAY_LENGTH;
+
+	public String isValidUserPwd(String userPwd) {
+		if (userPwd == null || userPwd.length() < MINIMUM_PWD_LENGTH || userPwd.length() > MAXIMUM_PWD_LENGTH) {
+			return "비밀번호 입력조건을 다시 확인해주세요.";
+		}
+		return null;
 	}
+
+	public String isValidUserBirth(String userBirth) {
+		if (userBirth == null || userBirth.length() != BIRTHDAY_LENGTH || !userBirth.matches("[0-9]+")) {
+			return "생년월일 입력조건을 다시 확인해주세요.";
+		}
+		return null;
+	}
+
 
 	public boolean isValidUserPhone(String userPhone) {
 		return userPhone != null && userPhone.matches("[0-9]+") && userPhone.length() <= PHONE_LENGTH;
 	}
 
-	public boolean isValidUserName(String userName){
-		return userName != null && userName.trim().length() > 0 && !userName.contains(" ");
+	public String isValidUserName(String userName) {
+		if (userName == null || userName.trim().length() == 0 || userName.contains(" ")) {
+			return "이름을 입력해주세요 공백은 안돼요~";
+		}
+		return null;
 	}
 
+	public String isValid() {
+		List<String> errorMessages = new ArrayList<>();
+
+		String userIdErrorMessage = isValidUserId(userId);
+		if (userIdErrorMessage != null) {
+			errorMessages.add(userIdErrorMessage);
+		}
+
+		String userPwdErrorMessage = isValidUserPwd(userPwd);
+		if(userPwdErrorMessage != null) {
+			errorMessages.add(userPwdErrorMessage);
+		}
+
+		String userBirthErrorMessage = isValidUserBirth(userBirth);
+		if(userBirthErrorMessage != null) {
+			errorMessages.add(userBirthErrorMessage);
+		}
+
+		String userNameErroMessage = isValidUserName(userName);
+		if(userNameErroMessage != null) {
+			errorMessages.add(userNameErroMessage);
+		}
+
+		if (errorMessages.isEmpty()){
+			return null;
+		} else {
+			return String.join(" and ",errorMessages );
+		}
+
 	}
 
-
+}
