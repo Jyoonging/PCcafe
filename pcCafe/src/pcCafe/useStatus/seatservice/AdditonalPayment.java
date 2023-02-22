@@ -24,7 +24,11 @@ public class AdditonalPayment {
 	public void showTimeTable(){
 		try {
 			Connection conn = JdbcTemplate.getConnection();
-			System.out.println("=========피시방 요금===========");
+			System.out.println("========================================");
+			System.out.println("             ┌──────────────┐              ");
+			System.out.println("             │   피시방 요금   │               ");
+			System.out.println("             └──────────────┘              ");
+			System.out.println("========================================");
 		
 			String sql = "SELECT * FROM TIME";
 			PreparedStatement pstmt = conn.prepareStatement(sql);

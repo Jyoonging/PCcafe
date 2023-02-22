@@ -11,7 +11,9 @@ public class AdminMain {
 	
 	public void adminmain() {
 		System.out.println("==================================");
-		System.out.println("|||    관리자    ||    로그인     |||");
+		System.out.println("     ┌──────────────────┐         ");
+		System.out.println("     |   관리자  로그인     |         ");
+		System.out.println("     └──────────────────┘        ");
 		System.out.println("==================================");
 		System.out.println();
 		AdminService as = new AdminService();
@@ -27,7 +29,9 @@ public class AdminMain {
 	//예외 catch 출력문
 	public static void Exception() {
 		System.out.println("==================================");
-		System.out.println("|||          잘못된 정보          |||");
+		System.out.println("     ┌──────────────────┐         ");
+		System.out.println("     |     잘못된 정보!    |         ");
+		System.out.println("     └──────────────────┘        ");
 		System.out.println("==================================");
 	}
 

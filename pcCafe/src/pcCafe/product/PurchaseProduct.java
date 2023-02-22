@@ -134,7 +134,11 @@ public class PurchaseProduct {
 		conn.commit();
 	
 		
-		System.out.println("\n=====장바구니=====");
+		System.out.println("========================================");
+		System.out.println("             ┌───────────┐              ");
+		System.out.println("             │   장바구니   │              ");
+		System.out.println("             └───────────┘              ");
+		System.out.println("========================================");
 		
 		//담은 물건 표시
 		String sql4 = "SELECT O.P_NUM, P_NAME, O_QTY, P_PRICE*O_QTY "
