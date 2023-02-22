@@ -85,7 +85,6 @@ public class AdminService {
 			}else{ 
 				System.out.println("없는 목록 번호! 다시 접속하세요");
 				adminRun = true;
-				break;
 			}
 		
 
