@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import adminPrj.admin.time.TimeData;
+import pcCafe.admin.time.TimeData;
 import pcCafe.main.JdbcTemplate;
 import pcCafe.main.Main;
 import pcCafe.main.MemberMenu;

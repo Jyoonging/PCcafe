@@ -5,8 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
-import adminPrj.admin.time.TimeData;
+import pcCafe.admin.time.TimeData;
 import pcCafe.main.*;
 import pcCafe.useStatus.ServiceManager;
 
