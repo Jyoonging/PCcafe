@@ -1,53 +1,9 @@
 package pcCafe.main;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 public class MemberData {
-	
-	    public static MemberData createMember(ResultSet rs) throws SQLException {
-	        int number = rs.getInt("MEMBER");
-	        String id = rs.getString("MEM_ID");
-	        String pwd = rs.getString("MEM_PWD");
-	        String name = rs.getString("MEM_NAME");
-	        String birth = rs.getString("MEM_BIRTH");
-	        String phone = rs.getString("MEM_PHONE");
-	        String quitYn = rs.getString("QUIT_YN");
-	        int memTime = rs.getInt("MEM_TIME");
 
-	        MemberData member = new MemberData(number,id,pwd,name,birth,phone,quitYn,memTime);
-	        return member;
-	    }
-
-	    public static ArrayList<MemberData> findMember(String keyword) throws  SQLException{
-	        ArrayList<MemberData> memberList = new ArrayList<>();
-
-	        // Search for members that match the keyword
-	        ResultSet rs = null;
-	        PreparedStatement pstmt = null;
-	        Connection conn = JdbcTemplate.getConnection();
-
-	        try {
-	            pstmt = conn.prepareStatement("SELECT * FROM MEMBER WHERE MEM_ID LIKE ?");
-	            pstmt.setString(1, "%" + keyword + "%");
-	            rs= pstmt.executeQuery();
-
-	            while(rs.next()){
-	                MemberData member = createMember(rs);
-	                memberList.add(member);
-	            }
-	        }finally {
-	            JdbcTemplate.close(rs);
-	            JdbcTemplate.close(pstmt);
-	            JdbcTemplate.close(conn);
-	        }
-
-	        return memberList;
-	    }
-
+		private static final int MINIMUM_ID_LENGTH = 5;
+		private static final int MINIMUM_PASSWORD_LENGTH = 4;
 
 	    public int getUserNum() {
 	        return userNum;
@@ -62,6 +18,10 @@ public class MemberData {
 	    }
 
 	    public void setUserId(String userId) {
+			if(userId.length() < MINIMUM_ID_LENGTH){
+				System.out.println("아이디는 5자리보다 커야함 ");
+				return;
+			}
 	        this.userId = userId;
 	    }
 
@@ -70,6 +30,10 @@ public class MemberData {
 	    }
 
 	    public void setUserPwd(String userPwd) {
+			if(userPwd.length() < MINIMUM_PASSWORD_LENGTH){
+				System.out.println("비밀번호는 4자리보다 커야함 ");
+				return;
+			}
 	        this.userPwd = userPwd;
 	    }
 
@@ -118,8 +82,8 @@ public class MemberData {
 
 	    public MemberData(int userNum, String userId, String userPwd, String userName, String userBirth, String userPhone, String quit_yn, int memTime) {
 	        this.userNum = userNum;
-	        this.userId = userId;
-	        this.userPwd = userPwd;
+	        setUserId(userId);
+	        setUserPwd(userPwd);
 	        this.userName = userName;
 	        this.userBirth = userBirth;
 	        this.userPhone = userPhone;
