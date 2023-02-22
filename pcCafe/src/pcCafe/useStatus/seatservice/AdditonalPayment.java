@@ -100,7 +100,6 @@ public class AdditonalPayment {
 		
 		}
 		
-		//timeAddMin과timeMin과feeNum을 한꺼번에 데이터로 관리하기
 	}	
 	
 	public void getInfo(TimeData data) {
@@ -170,6 +169,7 @@ public class AdditonalPayment {
 			PreparedStatement pstmt1 = conn.prepareStatement(sql1); 
 			PreparedStatement pstmt2 = conn.prepareStatement(sql2);
 			PreparedStatement pstmt4 = conn.prepareStatement(sql4);
+			// 이용 번호로 이용 시작 시간 조회
 			pstmt1.setInt(1, use_num);
 			ResultSet rs1 = pstmt1.executeQuery();
 			rs1.next();

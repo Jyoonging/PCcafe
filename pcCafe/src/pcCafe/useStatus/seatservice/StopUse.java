@@ -15,8 +15,6 @@ import pcCafe.useStatus.ServiceManager;
 
 public class StopUse {
 	
-
-	
 	//이용 종료
 	public boolean stopUse() {
 		SeatServiceManager ssm = new SeatServiceManager();
@@ -41,7 +39,6 @@ public class StopUse {
 		try {
 			conn = JdbcTemplate.getConnection();
 			
-			
 			//useNum에 해당하는 줄의 종료시간을 업데이트
 			String sql5 = "UPDATE PC_USE SET PC_ENDTIME = SYSDATE WHERE USE_NUM = ?";
 			PreparedStatement pstmt5 = conn.prepareStatement(sql5);
@@ -53,7 +50,6 @@ public class StopUse {
 			}else {
 				System.out.println("올바른 값이 아닙니다.");
 			}
-			
 			
 			//시작시간, 종료시간 조회
 			String sql1 ="SELECT TO_CHAR(PC_STARTTIME,'DD HH24:MI:SS') AS S_TIME, TO_CHAR(PC_ENDTIME,'DD HH24:MI:SS')AS E_TIME FROM PC_USE WHERE USE_NUM = ?";
@@ -128,10 +124,6 @@ public class StopUse {
 			System.out.println("올바른 값이 아닙니다.");
 		}
 		
-		
-		
 	}
 	
-	
-
 }
