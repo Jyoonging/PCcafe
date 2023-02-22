@@ -1,4 +1,4 @@
-package adminPrj.admin.time;
+package pcCafe.admin.time;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

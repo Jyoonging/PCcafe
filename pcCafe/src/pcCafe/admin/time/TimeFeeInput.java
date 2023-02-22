@@ -1,4 +1,4 @@
-package adminPrj.admin.time;
+package pcCafe.admin.time;
 
 import pcCafe.main.Main;
 
