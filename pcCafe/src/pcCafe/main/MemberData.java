@@ -3,6 +3,8 @@ package pcCafe.main;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MemberData {
 
@@ -31,10 +33,6 @@ public class MemberData {
 	    }
 
 	    public void setUserId(String userId) {
-			if(!isValidUserId(userId)){
-				System.out.println("아이디 입력조건을 다시 확인해주세요");
-				return;
-			}
 	        this.userId = userId;
 	    }
 
@@ -108,10 +106,10 @@ public class MemberData {
 
 	    public MemberData(int userNum, String userId, String userPwd, String userName, String userBirth, String userPhone, String quit_yn, int memTime) {
 	        this.userNum = userNum;
-	        setUserId(userId);
-	        setUserPwd(userPwd);
+	        this.userId = userId;
+	        this.userPwd = userPwd;
 	        this.userName = userName;
-	        setUserBirth(userBirth);
+	        this.userPhone = userPhone;
 	        this.quit_yn = quit_yn;
 	        this.memTime = memTime;
 	    }
@@ -149,9 +147,10 @@ public class MemberData {
 	    private int memTime;
 
 
-	public boolean isValidUserId(String userId) {
+	public String isValidUserId(String userId) {
+		List<String> errorMessages = new ArrayList<>();
 		if (userId == null || userId.length() <= MINIMUM_ID_LENGTH){
-			return false;
+			errorMessages.add("id는 " + (MINIMUM_ID_LENGTH+1) +"보다 커야함");
 		}
 
 		try (
@@ -162,14 +161,17 @@ public class MemberData {
 				rs.next();
 				int count = rs.getInt(1);
 				if (count > 0) {
-					System.out.println("이 아이디는 이미 존재합니다");
-					return false;
+					errorMessages.add("이 아이디는 이미 존재합니다.");
 				}
 			}catch (Exception e){
 				System.out.println("바보");
 			}
 
-			return true;
+			if(errorMessages.isEmpty()){
+				return null;
+			} else {
+				return String.join(" and ", errorMessages);
+			}
 		}
 
 
