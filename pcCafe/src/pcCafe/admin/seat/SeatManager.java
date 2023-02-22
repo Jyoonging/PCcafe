@@ -25,6 +25,7 @@ public class SeatManager {
 				run = false;
 			}
 			else {
+				System.out.println("");
 				System.out.println("==================================");
 				System.out.println("||      올바른 번호를 입력하세요      ||");
 				System.out.println("==================================");

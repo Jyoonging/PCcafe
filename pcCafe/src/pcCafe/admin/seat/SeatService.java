@@ -3,6 +3,7 @@ package pcCafe.admin.seat;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import pcCafe.admin.AdminMain;
 import pcCafe.main.JdbcTemplate;
@@ -29,10 +30,10 @@ public class SeatService {
 			while(rs.next()) {
 				String no= rs.getString("SEAT_NUM");
 				String broken = rs.getString("BROKEN_YN");
-				String mType = rs.getString("MONITOR_TYPE");
+				int mType = rs.getInt("MONITOR_TYPE");
 				String sType = rs.getString("SEAT_TYPE");
 				String u = rs.getString("USAGE_YN");
-				System.out.print("| 좌석번호 : "+ no + " | 고장여부 : "+ broken + " | 모니터 :  "+ mType + " | 타입 : " + sType  + " | 이용상태 : " + u +"|");
+				System.out.print("| 좌석번호 : "+ no + " | 고장여부 : "+ broken + " | 모니터 :  "+ mType + "인치 | 타입 : " + sType  + " | 이용상태 : " + u +"|");
 				System.out.println();
 			}
 			System.out.println("==================================================================");
@@ -51,10 +52,10 @@ public class SeatService {
 		SeatData data = SI.editSeat();
 		try {
 			Connection conn = JdbcTemplate.getConnection();
-			String sql = "UPDATE SEAT SET BROKEN_YN = ?, MONITOR_TYPE = ?||'인치' , SEAT_TYPE = ? , USAGE_YN = ?  WHERE SEAT_NUM = ? ";
+			String sql = "UPDATE SEAT SET BROKEN_YN = ?, MONITOR_TYPE = ? , SEAT_TYPE = ? , USAGE_YN = ?  WHERE SEAT_NUM = ? ";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, data.getBrokenYN());
-			pstmt.setString(2, data.getMonitorType() );
+			pstmt.setInt(2, data.getMonitorType() );
 			pstmt.setString(3,data.getSeatType() );
 			pstmt.setString(4, data.getUsageYN());
 			pstmt.setInt(5,data.getSeatNum());
@@ -81,12 +82,12 @@ public class SeatService {
 		SeatData data = SI.addSeat();
 		try {
 			Connection conn = JdbcTemplate.getConnection();
-			String sql = "INSERT INTO SEAT(SEAT_NUM,MONITOR_TYPE,SEAT_TYPE) VALUES(SEAT_SEQ.NEXTVAL,?||'인치',?)";
+			String sql = "INSERT INTO SEAT(SEAT_NUM,MONITOR_TYPE,SEAT_TYPE) VALUES(SEAT_SEQ.NEXTVAL,?,?)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1,data.getBrokenYN());
-			pstmt.setString(1, data.getMonitorType());
+			pstmt.setInt(1, data.getMonitorType());
 			pstmt.setString(2, data.getSeatType());
 			int result = pstmt.executeUpdate();
+			System.out.println();
 			if(result == 1) {
 				System.out.println("==================================");
 				System.out.println("||       신규 좌석 추가 성공 !       ||");
@@ -97,10 +98,12 @@ public class SeatService {
 				System.out.println("||      입력값 오류로 좌석 추가 실패   ||");
 				System.out.println("==================================");
 			}
-			conn.close();
-		}catch(Exception e) {
-			AdminMain.Exception();
-		}
+        } catch (Exception e) {
+        	AdminMain.Exception();
+             
+        }
+			   
+		      
 	}
 	
 }

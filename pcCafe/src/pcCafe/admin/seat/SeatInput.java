@@ -1,25 +1,35 @@
 package pcCafe.admin.seat;
 
+import pcCafe.admin.AdminMain;
 import pcCafe.main.Main;
 
 public class SeatInput {
 
 	public SeatData addSeat() {
+		
 		System.out.println("==================================");
 		System.out.println("||       신규 좌석을 추가합니다      ||");
 		System.out.println("==================================");
 		System.out.println("==================================");
 		System.out.print("  모니터 사이즈 : ");
-		String mSize = Main.SC.nextLine().trim();
-		System.out.println("==================================");
-		System.out.print("  좌석타입 (흡연/금연) : ");
-		String seat_Type = Main.SC.nextLine().trim();
-		System.out.println("==================================");
 		SeatData data = new SeatData();
-		data.setMonitorType(mSize);
-		data.setSeatType(seat_Type);
-		return data;
-		
+		try {
+			int mSize = Integer.parseInt(Main.SC.nextLine().trim());
+			System.out.println("==================================");
+			System.out.print("  좌석타입 (흡연/금연) : ");
+			String seat_Type = Main.SC.nextLine().trim();
+			System.out.println("==================================");
+			System.out.println(mSize);
+			System.out.println(seat_Type);
+			data.setMonitorType(mSize);
+			data.setSeatType(seat_Type);
+			return data;
+			
+		}catch(Exception e){
+			AdminMain.Exception();
+			return data;
+			
+		}
 	}
 	
 	public SeatData editSeat() {
@@ -37,7 +47,7 @@ public class SeatInput {
 		String broken = b.toUpperCase();
 		System.out.println("==================================");
 		System.out.print("  모니터 사이즈 : ");
-		String mType  = Main.SC.nextLine().trim();
+		int mType  = Integer.parseInt(Main.SC.nextLine().trim());
 		System.out.println("==================================");
 		System.out.print("  흡연/금연 : ");
 		String smoke = Main.SC.nextLine().trim();
