@@ -46,7 +46,6 @@ public class StockService {
 	}
 	
 	public void volume() {
-		StockLog sl = new StockLog();
 		try {
 			ProductData pd =  SI.volume();
 			Connection conn = JdbcTemplate.getConnection();
@@ -117,7 +116,6 @@ public class StockService {
 	}
 	
 	public void add() {
-		StockLog sl = new StockLog();
 		try {
 			ProductData pd = SI.add();
 			Connection conn = JdbcTemplate.getConnection();

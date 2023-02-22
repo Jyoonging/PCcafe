@@ -3,7 +3,6 @@ package pcCafe.admin.seat;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import pcCafe.admin.AdminMain;
 import pcCafe.main.JdbcTemplate;
