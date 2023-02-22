@@ -16,7 +16,7 @@ public class MemberService {
 		try {
 			
 			Connection conn = JdbcTemplate.getConnection();
-			String sql = "SELECT MEM_ID, MEM_NAME, MEM_TIME, QUIT_YN FROM MEMBER ";
+			String sql = "SELECT MEM_ID, MEM_NAME, MEM_TIME, QUIT_YN FROM MEMBER ORDER BY MEM_NUM";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			
