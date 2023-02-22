@@ -8,12 +8,15 @@ public class SeatManager {
 		SeatService seats = new SeatService();
 		boolean run = true;
 		while(run) {
-			System.out.println("==================================");
-			System.out.println("=========좌석 관리 번호를 선택=========");
-			System.out.println("|| 1. 모든 좌석 보기, 2.좌석 상태 변경 ||");
-			System.out.println("|| 3. 신규 좌석 추가,    9. 뒤로가기  ||");
-			System.out.println("==================================");
-			System.out.print("   :  "   );
+			System.out.println();
+			System.out.println("====================================  관리자 메뉴 >   ====================================================");
+			System.out.println("                                                                                       "); 
+			System.out.println("    ┌────────────────┐  ┌──────────────┐  ┌─────────────┐    ┌─────────────┐                                   ");
+			System.out.println("    │ 1. 모든 좌석 조회  │  │ 2. 상품 관리    │  │ 3. 좌석 관리  │    │ 9. 뒤로 가기   │                                       ");
+			System.out.println("    └────────────────┘  └──────────────┘  └─────────────┘    └─────────────┘                                 ");
+			System.out.println("=====================================================================================================");
+			System.out.print("메뉴를 선택하세요. > ");
+			System.out.print("  : ");
 			String select = Main.SC.nextLine().trim();
 			if(select.equals("1")) {
 				seats.showSeat();

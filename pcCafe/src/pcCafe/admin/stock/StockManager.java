@@ -14,12 +14,17 @@ public class StockManager {
 		boolean run = true;
 		while(run) {
 			System.out.println();
-			System.out.println("==================================");
-			System.out.println("=========상품 관리 번호를 선택=========");
-			System.out.println("|| 1.목록 보기, 2.수량 추가, 3.가격변경||");
-			System.out.println("|| 4.상품 추가, 5.입고 내역, 9.뒤로가기||");
-			System.out.println("==================================");
-			System.out.print(" :  "   );
+			System.out.println("====================================  관리자 메뉴 >   ====================================================");
+			System.out.println("                                                                                       "); 
+			System.out.println("    ┌────────────────┐  ┌────────────────┐  ┌────────────────┐                                           ");
+			System.out.println("    │ 1. 상품 목록 조회  │  │ 2. 상품 수량 추가  │  │   3. 가격 변경    │                                                  ");
+			System.out.println("    └────────────────┘  └────────────────┘  └────────────────┘                                           ");
+			System.out.println("    ┌─────────────────┐  ┌──────────────┐  ┌──────────────┐                                           ");
+			System.out.println("    │ 4. 상품 목록에 추가  │  │  5. 입고 내역  │  │   9. 뒤로 가기  │                                                  ");
+			System.out.println("    └─────────────────┘  └──────────────┘  └──────────────┘                                           ");
+			System.out.println("=====================================================================================================");
+			System.out.print("메뉴를 선택하세요. > ");
+			System.out.print("  : ");
 			String select = Main.SC.nextLine().trim();
 			
 			if(select.equals("1")) {

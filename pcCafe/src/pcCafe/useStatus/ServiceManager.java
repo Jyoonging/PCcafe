@@ -53,9 +53,9 @@ public class ServiceManager {
 		while(run) {
 			System.out.println("====================================  회원메뉴 >   ====================================================");
 			System.out.println("                                                                                       "); 
-			System.out.println("    ┌───────────┐  ┌───────────┐  ┌─────────┐   ");
-			System.out.println("    │1. 요금 선택 │  │2. 좌석 선택 │  │ 3. 종료  │   ");
-			System.out.println("    └───────────┘  └───────────┘  └─────────┘    ");
+			System.out.println("    ┌────────────┐  ┌────────────┐  ┌──────────┐   ");
+			System.out.println("    │1. 요금 선택   │  │2. 좌석 선택  │  │ 3. 종료   │   ");
+			System.out.println("    └────────────┘  └────────────┘  └──────────┘    ");
 			System.out.println("=====================================================================================================");
 			System.out.print("메뉴를 선택하세요. > ");
 			PurchaseTime pt = new PurchaseTime();

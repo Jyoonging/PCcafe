@@ -36,9 +36,11 @@ public class AdminService {
 				conn.close();
 				return ADMIN_NUM;
 			}else {
-				System.out.println("==========================");
-				System.out.println("=========로그인 실패=========");
-				System.out.println("==========================");
+				System.out.println("==================================");
+				System.out.println("     ┌──────────────────┐         ");
+				System.out.println("     |     로그인 실패     |         ");
+				System.out.println("     └──────────────────┘        ");
+				System.out.println("==================================");
 				return 0;
 			}
 			
@@ -61,11 +63,16 @@ public class AdminService {
 		boolean adminRun;
 		do {
 			System.out.println();
-			System.out.println("==================================");
-			System.out.println("============관리자로 시작============");
-			System.out.println("|1. 회원관리, 2. 상품관리, 3. 좌석 관리|");
-			System.out.println("|4. 사람찾기, 5. 시간,요금관리, 9. 종료|");
-			System.out.println("==================================");
+			System.out.println("====================================  관리자 메뉴 >   ====================================================");
+			System.out.println("                                                                                       "); 
+			System.out.println("    ┌────────────┐  ┌────────────┐  ┌───────────┐                                           ");
+			System.out.println("    │ 1. 회원 관리  │  │ 2. 상품 관리 │  │ 3. 좌석 관리 │                                                  ");
+			System.out.println("    └────────────┘  └────────────┘  └───────────┘                                           ");
+			System.out.println("    ┌────────────┐  ┌────────────────┐  ┌──────────┐                                           ");
+			System.out.println("    │ 4. 사람 찾기  │  │ 5. 시간, 요금 관리 │  │ 9. 종료   │                                                  ");
+			System.out.println("    └────────────┘  └────────────────┘  └──────────┘                                           ");
+			System.out.println("=====================================================================================================");
+			System.out.print("메뉴를 선택하세요. > ");
 			System.out.print("  : ");
 			String input = AdminMain.SC.nextLine().trim();
 			if("1".equals(input)) {

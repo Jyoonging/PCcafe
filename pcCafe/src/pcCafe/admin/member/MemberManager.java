@@ -8,11 +8,12 @@ public class MemberManager {
 		boolean run = true;
 		while(run) {
 			System.out.println();
-			System.out.println("==============회원관리==============");
-			System.out.println("|1. 모든 회원정보조회, 2. 비밀번호 초기화|");
-			System.out.println("|3. 회원 휴면 계정 처리 ,   9. 뒤로가기|");
-			System.out.println("==================================");
-			System.out.print("번호 선택 : ");
+			System.out.println("====================================  관리자 메뉴 >   ====================================================");
+			System.out.println("    ┌──────────────────┐  ┌────────────────┐  ┌───────────────────┐     ┌────────────┐                           ");
+			System.out.println("    │ 1. 모든 회원정보 조회 │  │ 2. 비밀번호 초기화  │  │ 3. 회원 휴먼계정 전환  │      │ 9. 뒤로 가기 │                           ");
+			System.out.println("    └──────────────────┘  └────────────────┘  └───────────────────┘     └────────────┘                          ");
+			System.out.println("=====================================================================================================");
+			System.out.print("메뉴를 선택하세요. > ");
 			String num = Main.SC.nextLine().trim();
 			if (num.equals("1")) {
 				ms.showMemberInfo(); 
