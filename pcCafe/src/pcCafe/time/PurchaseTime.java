@@ -131,10 +131,10 @@ public final class PurchaseTime {
 				change = payCash(data); 
 				if(change<0) {
 					System.out.println("결제 실패입니다. 전단계로 돌아갑니다.");
+				}else {
+					System.out.println("거스름돈 : "+change +"원");
+					addPayList(data);
 				}
-				System.out.println("거스름돈 : "+change +"원");
-				addPayList(data);
-				
 			}else {
 				System.out.println("잘못된 입력입니다. 전 단계로 돌아갑니다.");
 			}
