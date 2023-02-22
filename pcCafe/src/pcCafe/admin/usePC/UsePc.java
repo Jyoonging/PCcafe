@@ -31,7 +31,9 @@ public class UsePc {
 					System.out.println();
 					
 				}
-				System.out.println("1. 계속찾기,  2. 뒤로가기");
+				System.out.println("=============선 택 항 목============");
+				System.out.println("|| 1. 계속찾기          2. 뒤로가기 ||");
+				System.out.println("==================================");
 				System.out.print("  : " );
 				String c = AdminMain.SC.nextLine().trim();
 				if("2".equals(c)) {

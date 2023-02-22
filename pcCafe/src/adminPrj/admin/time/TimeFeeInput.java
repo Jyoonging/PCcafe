@@ -29,11 +29,6 @@ public class TimeFeeInput {
 		return td;
 	}
 	
-	public TimeData delete() {
-		TimeData td = new TimeData();
-		System.out.println("구현예정");
-		return td;
-	}
 	
 
 }

@@ -55,7 +55,5 @@ public class TimeFeeService {
 		}
 		
 	}
-	public void delete() {
-		System.out.println("꼭 delete가 필요할까 의문이 있음 ");
-	}
+	
 }
