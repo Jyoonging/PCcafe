@@ -36,7 +36,7 @@ public class TimeFeeManager {
 				}
 				System.out.println("================================");
 				System.out.println("===============시간권=============");
-				System.out.println("1. 수정 , 2. 추가         , 9. 종료");
+				System.out.println("1. 수정   ,   2. 추가    ,  9. 뒤로");
 				System.out.print(":  "   );
 				String select = Main.SC.nextLine().trim();
 				if(select.equals("1")) {
