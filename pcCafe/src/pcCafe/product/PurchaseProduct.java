@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Scanner;
 
-import adminPrj.admin.time.TimeData;
 import pcCafe.main.JdbcTemplate;
 import pcCafe.main.Main;
 import pcCafe.useStatus.ServiceManager;

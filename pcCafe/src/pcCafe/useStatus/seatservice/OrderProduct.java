@@ -11,6 +11,8 @@ public class OrderProduct {
 		
 		PurchaseProduct pp = new PurchaseProduct();
 		
+		System.out.println("=====상품주문=====");
+		
 		//상품 보여주기
 		try {
 			pp.showProduct();
@@ -42,8 +44,8 @@ public class OrderProduct {
 		//결제
 		try {
 			pp.payProduct();
-		} catch (Exception e1) {
-			e1.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("올바른 값이 아닙니다.");
 		}
 		
 		//결제종료
