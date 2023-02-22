@@ -106,20 +106,63 @@ public class AdditonalPayment {
 		
 	}	
 	
+	//카드결제, 현금결제 결제 방식 선택받기
 	public void getInfo(TimeData data) {
+		int change =0;
 		System.out.print(data.getTimeAddMin()+"분, "+data.getTimePrice()+"원 결제 하시겠습니까? (y/n)");
+		//
 		String input = Main.SC.nextLine().trim();
 		if(input.equalsIgnoreCase("y")) {
-			System.out.println("결제가 완료되었습니다.");
-			addPayList(data);
+			//카드결제인지 현금결제인지 묻기
+			System.out.println("어떤 방식으로 결제하시겠습니까?");
+			System.out.println("1.카드결제 2.현금결제");
+			
+			//스캐너로 값입력받기
+			String input2 = Main.SC.nextLine().trim();
+			
+			//switch문으로 선택하기
+			if("1".equals(input2)) {
+				payCard(data);
+			}else if("2".equals(input2)) {
+				change = payCash(data); 
+				if(change<0) {
+					System.out.println("결제 실패입니다. 전단계로 돌아갑니다.");
+				}else {
+					System.out.println("거스름돈 : "+change +"원");
+					addPayList(data);
+				}
+			}else {
+				System.out.println("잘못된 입력입니다. 전 단계로 돌아갑니다.");
+			}
+				
 		}else if(input.equalsIgnoreCase("n")) {
 			System.out.println("결제가 취소되었습니다. 이전 화면으로 돌아갑니다.");
 			//뒤로가기하면 시간권선택화면으로 돌아가기 
 		}else {
 			System.out.println("잘못입력하셨습니다. 이전 화면으로 돌아갑니다.");
 		}
+		
+	}
+	public void payCard(TimeData data) {
+		System.out.println("카드결제가 완료되었습니다.");
+		addPayList(data);
 	}
 	
+	public int payCash(TimeData data) {
+		//고객에게 받은 금액
+		System.out.print("내실 현금을 입력해주세요.:");
+		String input = Main.SC.nextLine();
+		int inputCash = Integer.parseInt(input);
+		
+		//요금제 가격 알아와야함
+		int timePrice = data.getTimePrice();
+		
+		//내실금액에서 요금제 가격을 뺀 금액구해서 int 거스름돈 반환하기change
+		int change = inputCash - timePrice;
+		return change;
+		
+	}
+
 	//시간권 결제내역테이블에 결제 내역 추가하기
 	public void addPayList(TimeData data) {
 		try {
