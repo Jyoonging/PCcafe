@@ -127,3 +127,9 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,windows,java
+pcCafe/pcCafe.iml
+pcCafe/.idea/.gitignore
+pcCafe/.idea/misc.xml
+pcCafe/.idea/modules.xml
+pcCafe/.idea/vcs.xml
+pcCafe/.idea/libraries/ojdbc10_19_17_0_0.xml
