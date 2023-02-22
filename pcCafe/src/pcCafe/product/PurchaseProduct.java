@@ -18,7 +18,7 @@ public class PurchaseProduct {
 		
 		Connection conn = JdbcTemplate.getConnection();
 		
-		String sql = "SELECT * FROM PRODUCT_LIST";
+		String sql = "SELECT * FROM PRODUCT_LIST ORDER BY P_NUM";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		
