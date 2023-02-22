@@ -19,13 +19,15 @@ package pcCafe.main;
 			String userBirthday = "";
 			String userPhone = "";
 
-			while(true){
+			String errorMessage;
 
-				userId = view.getInput("ID(5자리 이상)");
-				if(md.isValidUserId(userId)){
-					break;
+			do {
+				userId = view.getInput("아이디(5자리 이상)");
+				errorMessage = md.isValidUserId(userId);
+				if(errorMessage != null){
+					view.showError(errorMessage);
 				}
-			}
+			} while (errorMessage != null);
 
 			while(true){
 				userPwd = view.getInput("비밀번호(4~12자리)");
@@ -90,8 +92,9 @@ package pcCafe.main;
 	            String id = view.getInput("아이디");
 	            String pwd = view.getInput("패스워드");
 
-	            md.setUserId(id);
-	            md.setUserPwd(pwd);
+				md.setUserId(id);
+				md.setUserPwd(pwd);
+
 
 	            //sql문 select문 실행 !
 	            Connection conn = JdbcTemplate.getConnection();
@@ -112,6 +115,7 @@ package pcCafe.main;
 	            	return 0;
 	            }
 	        }catch(SQLException e){
+				e.printStackTrace();
 	            JdbcTemplate.rollback(JdbcTemplate.getConnection());
 				System.out.println("로그인 실패");
 	            System.out.println("없는 정보입니다.");
