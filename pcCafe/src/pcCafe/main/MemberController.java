@@ -29,34 +29,40 @@ package pcCafe.main;
 				}
 			} while (errorMessage != null);
 
-			while(true){
+
+			do {
 				userPwd = view.getInput("비밀번호(4~12자리)");
-				if(md.isValidUserPwd(userPwd)){
-					break;
+				errorMessage = md.isValidUserPwd(userPwd);
+				if(errorMessage != null){
+					view.showError(errorMessage);
 				}
-			}
+			} while (errorMessage != null);
 
-			while(true){
+			do {
 				userName = view.getInput("이름");
-				if(md.isValidUserName(userName)){
-					break;
+				errorMessage = md.isValidUserName(userName);
+				if(errorMessage != null){
+					view.showError(errorMessage);
 				}
-			}
+			}while (errorMessage != null);
 
-
-			while(true){
+			do {
 				userBirthday = view.getInput("생년월일(6자리)");
-				if(md.isValidUserBirth(userBirthday)){
-					break;
+				errorMessage = md.isValidUserBirth(userBirthday);
+				if(errorMessage != null) {
+					view.showError(errorMessage);
 				}
-			}
+			}while (errorMessage != null);
 
-			while(true){
-				userPhone = view.getInput("전화번호 (11자리 이하)");
-				if(md.isValidUserPhone(userPhone)){
-					break;
+			do {
+				userPhone = view.getInput("전화번호(11자리 이하)");
+				errorMessage = md.isValidUserPhone(userPhone) ? null : "전화번호 입력조건을 다시 확인해주세요";
+				if(errorMessage != null){
+					view.showError(errorMessage);
 				}
-			}
+			}while (errorMessage != null);
+
+
 	            md.setUserId(userId);
 	            md.setUserPwd(userPwd);
 	            md.setUserName(userName);
