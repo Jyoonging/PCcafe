@@ -2,6 +2,7 @@ package pcCafe.product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import pcCafe.main.JdbcTemplate;
@@ -18,7 +19,7 @@ public class PurchaseProduct {
 		
 		Connection conn = JdbcTemplate.getConnection();
 		
-		String sql = "SELECT * FROM PRODUCT_LIST";
+		String sql = "SELECT * FROM PRODUCT_LIST ORDER BY P_NUM";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		
@@ -29,15 +30,32 @@ public class PurchaseProduct {
 			String p_price = rs.getString("P_PRICE");
 			System.out.println(p_num + ". " + p_name + " / " + p_qty + "개 / " + p_price + "원");
 		}
+
 	}
 	
+	//주문시작여부
+	public int orderGo() {
+		while(true) {
+			System.out.println("\n0.돌아가기 1.주문시작");
+			System.out.print("번호를 선택해주세요 : ");
+			String orderRequest = SC.nextLine();
+			
+			if(orderRequest.equals("0")) {
+				return 0;
+			}else if(orderRequest.equals("1")) {
+				return 1;
+			}else {
+				System.out.println("\n다시 입력해주세요.");
+				continue;
+			}
+		}
+	}
+
 	
 	//주문 생성
 	public void createOrder() throws Exception {
-		
 		Connection conn = JdbcTemplate.getConnection();
-	
-		//
+		
 		//결제내역번호 생성
 		String sql1 = "INSERT INTO PRODUCT_PAYMENT(PP_NUM, USE_NUM) VALUES(PP_NUM_SEQ.NEXTVAL,?)";
 		
@@ -45,7 +63,6 @@ public class PurchaseProduct {
 		pstmt1.setInt(1, ServiceManager.useNum);
 		pstmt1.executeUpdate();
 		conn.commit();
-
 	}
 	
 	
@@ -58,7 +75,7 @@ public class PurchaseProduct {
 				int selectPnum = Integer.parseInt(pnum);
 				return selectPnum;
 			}catch (Exception e) {
-				System.out.println("\n정상적인 숫자를 입력해주세요.");
+				System.out.println("\n다시 입력해주세요.");
 			}
 		}
 	}
@@ -72,7 +89,7 @@ public class PurchaseProduct {
 				int selectPqty = Integer.parseInt(pqty);
 				return selectPqty;
 			}catch (Exception e) {
-				System.out.println("\n정상적인 숫자를 입력해주세요.");
+				System.out.println("\n다시 입력해주세요.");
 			}
 		}
 	}
