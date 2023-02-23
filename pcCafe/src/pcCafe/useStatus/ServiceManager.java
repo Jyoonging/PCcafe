@@ -116,7 +116,7 @@ public class ServiceManager {
 	// 좌석 배열 보여주기 (select 좌석 정보)
 	public void showSeat() {
 	    // SQL 실행
-	    String sql1 = "SELECT BROKEN_YN, SEAT_NUM, SEAT_TYPE, USAGE_YN FROM SEAT WHERE BROKEN_YN = 'N' ";
+	    String sql1 = "SELECT BROKEN_YN, SEAT_NUM, SEAT_TYPE, USAGE_YN FROM SEAT WHERE BROKEN_YN = 'N' order by seat_num";
 	    String sql2 = "SELECT SEAT_NUM,BROKEN_YN FROM SEAT WHERE BROKEN_YN = 'Y'";
 	    Connection conn;
 	    try {

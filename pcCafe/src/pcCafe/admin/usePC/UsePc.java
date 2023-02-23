@@ -17,7 +17,7 @@ public class UsePc {
 				System.out.print("찾으실 회원 이름 : ");
 				String findUserName = AdminMain.SC.nextLine().trim();
 				Connection conn = JdbcTemplate.getConnection();
-				String sql = "SELECT MEM_NAME , P.SEAT_NUM , USAGE_YN FROM MEMBER M JOIN PC_USE P ON M.MEM_NUM = P.USE_NUM JOIN SEAT S ON P.SEAT_NUM = S.SEAT_NUM WHERE MEM_NAME = ? AND USAGE_YN = 'Y'";
+				String sql = "SELECT MEM_NAME , P.SEAT_NUM , USAGE_YN FROM MEMBER M JOIN PC_USE P ON M.MEM_NUM = P.MEM_NUM JOIN SEAT S ON P.SEAT_NUM = S.SEAT_NUM WHERE MEM_NAME = ? AND USAGE_YN = 'Y'";
 				PreparedStatement pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, findUserName);
 				ResultSet rs = pstmt.executeQuery();
