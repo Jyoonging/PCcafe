@@ -11,6 +11,7 @@ import pcCafe.admin.stock.StockManager;
 import pcCafe.admin.time.TimeFeeManager;
 import pcCafe.admin.usePC.UsePc;
 import pcCafe.main.JdbcTemplate;
+import pcCafe.main.Main;
 
 
 
@@ -60,7 +61,8 @@ public class AdminService {
 		SeatManager seatm = new SeatManager();
 		UsePc us = new UsePc();
 		TimeFeeManager tfm = new TimeFeeManager();
-		boolean adminRun;
+		Sales s = new Sales();
+		boolean adminRun=false;
 		do {
 			System.out.println();
 			System.out.println("====================================  관리자 메뉴 >   ====================================================");
@@ -72,6 +74,7 @@ public class AdminService {
 			System.out.println("    │ 4. 사람 찾기  │  │ 5. 시간, 요금 관리 │  │ 9. 종료   │                                                  ");
 			System.out.println("    └────────────┘  └────────────────┘  └──────────┘                                           ");
 			System.out.println("=====================================================================================================");
+			System.out.println("6. 매출조회");
 			System.out.print("메뉴를 선택하세요. > ");
 			System.out.print("  : ");
 			String input = AdminMain.SC.nextLine().trim();
@@ -85,7 +88,25 @@ public class AdminService {
 				adminRun = us.findUserInfo();
 			}else if("5".equals(input)){
 				adminRun = tfm.showTimeFee();
-			}else if("9".equals(input)){
+			}else if("6".equals(input)) {
+				System.out.println("강분님 6번 아트추가해주세요.");
+				s.showMenu();
+				String sInput = Main.SC.nextLine().trim();
+				switch(sInput) {
+				case "1": 
+					adminRun = s.showTotalSales();
+					break;
+				case "2": 
+					adminRun= s.viewSalesforMember();
+					break;
+				case "3": 
+					adminRun =s.analyzeSales();
+					break;
+				}
+				
+				
+			}
+			else if("9".equals(input)){
 				adminRun= false;
 				System.out.println("종료합니다");
 				break ;
