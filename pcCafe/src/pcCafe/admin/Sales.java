@@ -3,9 +3,6 @@ package pcCafe.admin;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -17,10 +14,15 @@ import pcCafe.main.MemberData;
 public class Sales {
 	
 	public void showMenu() {
-		System.out.println("강분님꾸며주세요. 세일즈클래스의 showMenu메소드입니다.");
-		System.out.println("1. 지금까지의 총 매출액");
-		System.out.println("2. 특정 회원의 매출액");
-		System.out.println("3. 월간 하루.. 매출액 분석 뭐라표현하지?"); 
+		
+		System.out.println();
+		System.out.println("====================================  매출 조회 >   ====================================================");
+		System.out.println("                                                                                       "); 
+		System.out.println("    ┌─────────────┐  ┌────────────────┐  ┌─────────────┐    ┌─────────────┐                           ");
+		System.out.println("    │ 1. 총 매출    │  │ 2. 회원의 총 매출액 │  │ 3. 매출 분석  │    │ 9. 뒤로 가기   │                           ");
+		System.out.println("    └─────────────┘  └────────────────┘  └─────────────┘    └─────────────┘                           ");
+		System.out.println("=====================================================================================================");
+		
 	}
 	
 	//2023년 2월 22일의 매출 : 
@@ -50,7 +52,7 @@ public class Sales {
 			System.out.println(yearToday+"년"+monthToday+"월"+i+"일 매출액 :" +daySum);
 			System.out.println("-시간권 총 결제 금액 : "+viewDayTimeSales(i));
 			System.out.println("-상품구매 총 결제 금액 : "+viewDayProductSales(i));
-			
+			System.out.println();
 		}
 		int max = map.get(openDate);
 		int min =map.get(openDate);
@@ -111,7 +113,6 @@ public class Sales {
 			return daySales;
 			
 		}catch(Exception e) {
-			System.out.println("세일즈 3번째 매출액분석쪽에서 오류났음");
 			return 5; //터무니없이 작은 금액이 나오면 오류났다고 생각할수있게 만듦.
 		}
 		
@@ -130,7 +131,6 @@ public class Sales {
 			return daySales;
 			
 		}catch(Exception e) {
-			System.out.println("세일즈 3번째 매출액분석쪽에서 오류났음");
 			return 3; //터무니없이 작은 금액이 나오면 오류났다고 생각할수있게 만듦.
 		}
 		//지정한 날의 매출액 구하기
@@ -162,7 +162,6 @@ public class Sales {
 			System.out.println("시간제 금액:"+timeSum+"원, 상품 금액 :"+productSum+"원");
 			return true;
 		}catch(Exception e) {
-			System.out.println("왜오류나는지 모르겠는데요? 이거슨 세일즈의 36번째 줄에서 발생한 예외입니다.");
 			return true;
 		}
 	}
@@ -209,7 +208,6 @@ public class Sales {
 			
 			
 			}catch(Exception e) {
-				System.out.println("몰루? 당신이 만약 이오류를 발견한다면..? Sales의 68번줄로 오세요.");
 				return true;
 			}
 			

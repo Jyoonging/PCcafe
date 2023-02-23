@@ -67,14 +67,13 @@ public class AdminService {
 			System.out.println();
 			System.out.println("====================================  관리자 메뉴 >   ====================================================");
 			System.out.println("                                                                                       "); 
-			System.out.println("    ┌────────────┐  ┌────────────┐  ┌───────────┐                                           ");
-			System.out.println("    │ 1. 회원 관리  │  │ 2. 상품 관리 │  │ 3. 좌석 관리 │                                                  ");
-			System.out.println("    └────────────┘  └────────────┘  └───────────┘                                           ");
-			System.out.println("    ┌────────────┐  ┌────────────────┐  ┌──────────┐                                           ");
-			System.out.println("    │ 4. 사람 찾기  │  │ 5. 시간, 요금 관리 │  │ 9. 종료   │                                                  ");
-			System.out.println("    └────────────┘  └────────────────┘  └──────────┘                                           ");
+			System.out.println("    ┌────────────┐  ┌────────────┐   ┌───────────┐     ┌────────────┐                                  ");
+			System.out.println("    │ 1. 회원 관리  │  │ 2. 상품 관리 │   │ 3. 좌석 관리 │     │ 4. 사람 찾기  │                                  ");
+			System.out.println("    └────────────┘  └────────────┘   └───────────┘     └────────────┘                                  ");
+			System.out.println("     ┌────────────────┐   ┌────────────┐      ┌──────────┐                       ");
+			System.out.println("     │ 5. 시간, 요금 관리 │   │ 6. 매출 조회 │       │ 9. 종료   │                       ");
+			System.out.println("     └────────────────┘   └────────────┘      └──────────┘                       ");
 			System.out.println("=====================================================================================================");
-			System.out.println("6. 매출조회");
 			System.out.print("메뉴를 선택하세요. > ");
 			System.out.print("  : ");
 			String input = AdminMain.SC.nextLine().trim();
@@ -89,7 +88,6 @@ public class AdminService {
 			}else if("5".equals(input)){
 				adminRun = tfm.showTimeFee();
 			}else if("6".equals(input)) {
-				System.out.println("강분님 6번 아트추가해주세요.");
 				s.showMenu();
 				String sInput = Main.SC.nextLine().trim();
 				switch(sInput) {

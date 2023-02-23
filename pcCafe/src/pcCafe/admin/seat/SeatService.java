@@ -79,8 +79,8 @@ public class SeatService {
 	public void addSeat() {
 		System.out.println("좌석 추가");
 		SeatData data = SI.addSeat();
+		Connection conn = JdbcTemplate.getConnection();
 		try {
-			Connection conn = JdbcTemplate.getConnection();
 			String sql = "INSERT INTO SEAT(SEAT_NUM,MONITOR_TYPE,SEAT_TYPE) VALUES(SEAT_SEQ.NEXTVAL,?,?)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, data.getMonitorType());
@@ -91,14 +91,17 @@ public class SeatService {
 				System.out.println("==================================");
 				System.out.println("||       신규 좌석 추가 성공 !       ||");
 				System.out.println("==================================");
+				JdbcTemplate.commit(conn);
 			}else {
 				
 				System.out.println("==================================");
 				System.out.println("||      입력값 오류로 좌석 추가 실패   ||");
 				System.out.println("==================================");
+				JdbcTemplate.rollback(conn);
 			}
         } catch (Exception e) {
         	AdminMain.Exception();
+        	JdbcTemplate.rollback(conn);
              
         }
 			   
